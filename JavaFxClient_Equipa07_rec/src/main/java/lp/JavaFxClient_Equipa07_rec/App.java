@@ -13,11 +13,13 @@ public class App extends Application{
 	 public void start(Stage stage) throws Exception {
 	 FXMLLoader loader = new FXMLLoader(getClass().getResource("/main-view.fxml"));
 	 Scene scene = new Scene(loader.load());
+	 
 	 stage.setTitle("School API Client");
 	 stage.setScene(scene);
-	 // Set preferred window size
-	 stage.setWidth(500); // or 600, 800, whatever you prefer
-	 stage.setHeight(400); // optional
+
+	 stage.setWidth(500); 
+	 stage.setHeight(400); 
+	 
 	 stage.show();
 	 }
 	 public static void main(String[] args) {
