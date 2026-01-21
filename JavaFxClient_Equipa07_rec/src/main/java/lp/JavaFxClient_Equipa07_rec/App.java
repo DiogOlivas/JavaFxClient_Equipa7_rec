@@ -1,5 +1,10 @@
 package lp.JavaFxClient_Equipa07_rec;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 /**
  * Hello world!
  */
