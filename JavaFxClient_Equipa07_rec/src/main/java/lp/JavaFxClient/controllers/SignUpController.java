@@ -1,9 +1,13 @@
 package lp.JavaFxClient.controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import lp.JavaFxClient.services.ApiService;
 
 public class SignUpController {
@@ -45,14 +49,31 @@ public class SignUpController {
 	    	   show("Attention!", "Both The Password And The Confirmation Have To Be Equal!");
 	    	   return;
 	       }
-	      
-	       String json = """
-	   	 		{
-	   	 		"name": "%s",
-	   	 		"email": "%s",
-	   	 		"password": "%s"
-	   	 		}
-	   	 		""".formatted(username, email, password);
-	   	 show("Welcome to BudgetBuddy! 😊", api.post("/User", json));
+	       try {
+	    	   String json = """
+	  	   	 		{
+	  	   	 		"name": "%s",
+	  	   	 		"email": "%s",
+	  	   	 		"password": "%s"
+	  	   	 		}
+	  	   	 		""".formatted(username, email, password);
+	  	   	 	show("Welcome to BudgetBuddy! 😊", api.post("/User", json));
+	  	   	
+	  	   	 	try {
+	  	   	 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
+	  	   	 		Parent root = loader.load();
+
+	  	   	 		Stage stage = (Stage) txt_user.getScene().getWindow();
+	  	   	 		stage.setScene(new Scene(root));
+	  	   	 		stage.setTitle("Login");
+
+	  	   	 	} catch (Exception e) {
+	  	   	 		show("Error!", "An unknown error has ocurred, please try again.");
+	  	   	 		e.printStackTrace();
+	  	   	 	}	
+	       }catch (Exception e) {
+	    	   show("Warning!", "Error while trying to create account, please try again.");
+	    	   e.printStackTrace();
+	      }
 	 }
 }
