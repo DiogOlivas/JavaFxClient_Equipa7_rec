@@ -33,7 +33,7 @@ public class SignUpController {
 	 @FXML
 	 private PasswordField txt_passConf;
 	 
-	 @FXML
+	 @FXML //butao criar conta
 	 public void onCreateUser() {
 		   String username = txt_user.getText();
 	       String email = txt_email.getText();
