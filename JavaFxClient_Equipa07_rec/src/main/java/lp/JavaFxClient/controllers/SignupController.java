@@ -60,7 +60,7 @@ public class SignupController {
 	  	   	 	show("Welcome to BudgetBuddy! 😊", api.post("/User", json));
 	  	   	
 	  	   	 	try {
-	  	   	 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
+	  	   	 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
 	  	   	 		Parent root = loader.load();
 
 	  	   	 		Stage stage = (Stage) txt_user.getScene().getWindow();
