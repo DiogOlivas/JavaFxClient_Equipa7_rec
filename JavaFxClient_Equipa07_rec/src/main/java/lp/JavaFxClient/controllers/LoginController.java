@@ -13,7 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lp.JavaFxClient_Equipa07_rec.AuthClient;
 
-
+//
 public class LoginController {
 
     @FXML

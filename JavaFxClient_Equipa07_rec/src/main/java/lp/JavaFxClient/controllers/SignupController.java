@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lp.JavaFxClient.services.ApiService;
 
+//
 public class SignupController {
 	private final ApiService api = new ApiService();
 
