@@ -5,13 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lp.JavaFxClient_Equipa07_rec.AuthClient;
 
 
 public class LoginController {
+	private final ApiService api = new ApiService();
 
     @FXML
     private TextField txt_user;
@@ -21,19 +21,19 @@ public class LoginController {
 
     @FXML
     private void onLogin() {
-    	 String username = txt_user.getText();
-    	    String password = txt_pass.getText();
+    	  String username = txt_user.getText();
+        String password = txt_pass.getText();
 
-    	    boolean success = AuthClient.login(username, password);
+        boolean success = AuthClient.login(username, password);
 
-    	    if (success) {
-    	        openMenu();
-    	    } else {
-    	        Alert alert = new Alert(Alert.AlertType.ERROR);
-    	        alert.setHeaderText("Invalid login");
-    	        alert.setContentText("Username or password is incorrect");
-    	        alert.show();
-    	    }
+        if (success) {
+            openMenu();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Invalid login");
+            alert.setContentText("Username or password is incorrect");
+            alert.show();
+        }
     }
     
     private void openMenu() {
