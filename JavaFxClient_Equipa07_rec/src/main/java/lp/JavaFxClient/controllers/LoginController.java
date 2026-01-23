@@ -28,7 +28,7 @@ public class LoginController {
     private Button btn_login;
     
     @FXML
-    private Label label_sign;
+    private Label lbl_sign;
     
     private MainController mainController;
     
@@ -41,33 +41,26 @@ public class LoginController {
     }
     
     @FXML
+    private void initialize() {
+    	txt_user.clear();
+        txt_pass.clear();
+    
+        lbl_sign.setOnMouseClicked(event -> openSignUp());
+    }
+    
+    /**
+    @FXML
     private void initializeSignUp() {
-        label_sign.setOnMouseClicked(event -> openSignUp());
+        lbl_sign.setOnMouseClicked(event -> openSignUp());
     }
     
     @FXML
     private void initializeMenu() {
-    		btn_login.setOnMouseClicked(event -> onLogin());
+    		btn_login.setOnMouseClicked(event -> handleLogin());
     }
-
-    @FXML
-    private void onLogin() {
-    	String username = txt_user.getText();
-        String password = txt_pass.getText();
-
-        boolean success = AuthClient.login(username, password);
-
-        if (success) {
-        		show("Welcome to BudgetBuddy! 😊");
-            openMain();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Invalid login.");
-            alert.setContentText("Username or password is incorrect.");
-            alert.show();
-        }
-    }
+    **/
     
+    @FXML
     private void handleLogin() {
         String username = txt_user.getText();
         String password = txt_pass.getText();
@@ -101,7 +94,7 @@ public class LoginController {
     		loginWindow.close(); 
     	} catch (Exception e) {
     		 e.printStackTrace();
-    		 show("Error", "An unexpected error has occured, please try to log in again.");
+    		 show("Error", "An unexpected error has occured, please try again.");
     	}	
     }
     

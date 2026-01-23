@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
@@ -10,33 +12,48 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lp.JavaFxClient.controllers.LoginController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/background.jpg" />
          </image>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
       </ImageView>
-      <Button id="btn_logIn" layoutX="267.0" layoutY="293.0" mnemonicParsing="false" text="Log In">
+      <Button fx:id="btn_logIn" layoutX="267.0" layoutY="293.0" mnemonicParsing="false" onAction="#handleLogin" text="Log In">
          <font>
             <Font name="System Italic" size="12.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
-      <TextField id="txt_user" layoutX="216.0" layoutY="187.0" />
+      <TextField fx:id="txt_user" layoutX="216.0" layoutY="187.0">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></TextField>
       <Text fill="WHITE" layoutX="215.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="79.291015625" />
-      <TextField id="txt_pass" layoutX="216.0" layoutY="246.0" />
       <Text fill="WHITE" layoutX="215.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="79.291015625" />
       <ImageView fitHeight="152.0" fitWidth="244.0" layoutX="215.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/Logo_BugdetBuddy.png" />
          </image>
       </ImageView>
-      <Label id="btn_sign" layoutX="345.0" layoutY="338.0" text="Sign up" textFill="WHITE" underline="true">
+      <Label fx:id="lbl_sign" layoutX="345.0" layoutY="338.0" text="Sign up" textFill="WHITE" underline="true">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Label>
-      <Text fill="WHITE" layoutX="169.0" layoutY="351.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You don't have an account yet?" wrappingWidth="170.62432861328125" />
+      <Text fill="WHITE" layoutX="174.0" layoutY="351.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You don't have an account yet?" wrappingWidth="170.62432861328125" />
+      <PasswordField fx:id="txt_pass" layoutX="217.0" layoutY="246.0">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></PasswordField>
    </children>
    <effect>
       <ColorAdjust contrast="-0.22" />

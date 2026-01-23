@@ -39,14 +39,14 @@
 
   <build>
       <plugins>
-      <plugin>
- 		<groupId>org.openjfx</groupId>
- 		<artifactId>javafx-maven-plugin</artifactId>
-	 	<version>0.0.8</version>
- 			
- 		 <configuration>
- 			 <mainClass>lp.JavaFxClient.App</mainClass>
- 		 </configuration>
+      	<plugin>
+ 			<groupId>org.openjfx</groupId>
+    		<artifactId>javafx-maven-plugin</artifactId>
+    		<version>0.0.8</version>
+    
+    		<configuration>
+        		<mainClass>lp.JavaFxClient_Equipa07_rec.App</mainClass>
+    		</configuration>
  		</plugin>
       </plugins>
   </build>
