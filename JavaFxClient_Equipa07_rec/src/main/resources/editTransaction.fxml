@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="544.0" fitWidth="919.0" layoutX="-210.0" layoutY="-121.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../OneDrive/Imágenes/project/black.jpg" />
+         </image>
+      </ImageView>
+      <TextField id="txt_value" layoutX="220.0" layoutY="155.0" />
+      <Text fill="WHITE" layoutX="190.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit transaction">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="226.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Value:" />
+      <TextField id="txt_pay" layoutX="219.0" layoutY="252.0" prefHeight="25.0" prefWidth="149.0" />
+      <Text fill="WHITE" layoutX="221.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment method:" />
+      <Button id="btn_save" layoutX="273.0" layoutY="348.0" mnemonicParsing="false" text="Save" />
+      <Label id="lbl_cancel" layoutX="276.0" layoutY="377.0" text="Cancel" textFill="WHITE" underline="true" />
+      <ImageView fitHeight="84.0" fitWidth="149.0" layoutX="232.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../Downloads/1769011097555-removebg-preview.png" />
+         </image>
+      </ImageView>
+      <TextField id="txt_date" layoutX="219.0" layoutY="296.0" prefHeight="25.0" prefWidth="149.0" />
+      <Text fill="WHITE" layoutX="220.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
+      <TextField id="txt_desc" layoutX="220.0" layoutY="204.0" />
+      <Text fill="WHITE" layoutX="225.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" />
+   </children>
+</Pane>

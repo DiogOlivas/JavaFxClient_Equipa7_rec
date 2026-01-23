@@ -1,27 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="529.0" fitWidth="1016.0" layoutX="-416.0" layoutY="-129.0" pickOnBounds="true">
+      <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/background.jpg" />
+            <Image url="@../../../../../../OneDrive/Imágenes/project/black.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="121.0" fitWidth="126.0" layoutX="-1.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+      <TableView layoutX="8.0" layoutY="48.0" prefHeight="337.0" prefWidth="435.0">
+         <columns>
+            <TableColumn id="tbl_value" prefWidth="75.0" text="Value" />
+            <TableColumn id="tbl_desc" prefWidth="150.00000762939453" text="Description" />
+            <TableColumn id="tbl_pay" prefWidth="115.33329772949219" text="Payment method" />
+            <TableColumn id="tbl_pay" prefWidth="91.33331298828125" text="Date" />
+         </columns>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color green="0.7547216415405273" blue="1.0" />
+               </color>
+            </DropShadow>
+         </effect>
+      </TableView>
+      <TableView id="tbl_category" layoutX="455.0" layoutY="48.0" prefHeight="337.0" prefWidth="136.0">
+         <columns>
+            <TableColumn id="tbl_category" prefWidth="120.66665649414062" text="Categories" />
+         </columns>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color green="0.6333333253860474" blue="1.0" />
+               </color>
+            </DropShadow>
+         </effect>
+      </TableView>
+      <Button id="add_tran" layoutX="418.0" layoutY="48.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="+" />
+      <Button id="add_cat" layoutX="565.0" layoutY="49.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="+" />
+      <ImageView fitHeight="136.0" fitWidth="149.0" layoutX="-27.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/Logo_BugdetBuddy.png" />
+            <Image url="@../../../../../../Downloads/1769011097555-removebg-preview.png" />
          </image>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color green="0.4652046859264374" blue="0.6491228342056274" />
+               </color>
+            </DropShadow>
+         </effect>
       </ImageView>
-      <Label id="lbl_username" layoutX="258.0" layoutY="43.0" text="Olá user!" textFill="WHITE">
+      <Text fill="WHITE" layoutX="13.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transactions">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <effect>
+            <DropShadow height="28.79" radius="13.407499999999999" width="26.84">
+               <color>
+                  <Color green="0.5666666626930237" blue="1.0" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Text>
+      <Label id="lbl_catEdit" layoutX="456.0" layoutY="30.0" text="Edit" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label id="lbl_catDelete" layoutX="542.0" layoutY="29.0" text="Delete" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label id="lbl_tranEdit" layoutX="164.0" layoutY="30.0" text="Edit" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label id="lbl_tranDelete" layoutX="402.0" layoutY="29.0" text="Delete" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
          </font>
       </Label>
    </children>
-</AnchorPane>
+</Pane>
