@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -24,6 +25,9 @@ public class LoginController {
     private PasswordField txt_pass;
     
     @FXML
+    private Button btn_login;
+    
+    @FXML
     private Label label_sign;
     
     private MainController mainController;
@@ -37,8 +41,13 @@ public class LoginController {
     }
     
     @FXML
-    private void initialize() {
+    private void initializeSignUp() {
         label_sign.setOnMouseClicked(event -> openSignUp());
+    }
+    
+    @FXML
+    private void initializeMenu() {
+    		btn_login.setOnMouseClicked(event -> onLogin());
     }
 
     @FXML
