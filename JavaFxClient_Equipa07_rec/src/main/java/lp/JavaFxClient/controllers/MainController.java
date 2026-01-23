@@ -29,17 +29,14 @@ public class MainController {
 	 alert.showAndWait();	
  }
  
- @FXML
- private TextField tfUsername;
+ @FXML private Label lbl_username;
 
  @FXML
- private TextField tfEmail;
-
- @FXML
- private PasswordField tfPassword;
- 
- @FXML
- private PasswordField tfPasswordConf;
+ private void initialize() {
+     // runs automatically when the FXML loads
+     lbl_username.setText("Welcome " +  + "!");
+     System.out.println("FXML loaded");
+ }
  
  /**
  @FXML

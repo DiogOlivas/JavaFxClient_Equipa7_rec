@@ -26,7 +26,7 @@ public class AuthClient {
             HttpResponse<Void> response =
                     client.send(request, HttpResponse.BodyHandlers.discarding());
 
-            return response.statusCode() == 200; //OK
+            return response.statusCode() == 200;
 
         } catch (Exception e) {
             e.printStackTrace();
