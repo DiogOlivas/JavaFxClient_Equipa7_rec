@@ -1,87 +1,62 @@
 package lp.JavaFxClient.model;
 
+import java.util.List;
+
 public class TransactionDTO {
-    private Long id;
-    private String destination;
-    private String date;
+	private Long id;
     private double value;
-    private String paymentMethod;
-    private String category;
-    private Long userId;
+    private String date;
     private String description;
+    private Long userId; 
+    private List<Long> categoryIds; //list of category IDs 
+    
 
-    public TransactionDTO(){}
+    public TransactionDTO() {}
 
-    public TransactionDTO(Long id, String destination, String date, double value, String paymentMethod, String category, String description, Long userId){
+    public TransactionDTO(Long id, double value, String date, String description, Long userId, List<Long> categoryIds) {
         this.id = id;
-        this.destination = destination;
-        this.date = date;
         this.value = value;
-        this.paymentMethod = paymentMethod;
-        this.category = category;
         this.description = description;
         this.userId = userId;
+        this.date = date;
+        this.categoryIds = categoryIds;
     }
-
+    //
     public Long getId(){
-         return id; 
-        }
-    public void setId( Long id ){ 
+        return id;
+    }
+    public void setId(Long id){
         this.id = id;
     }
-
-    public String getDestination(){
-         return destination;
-    }
-    public void setDestination( String destination ){ 
-        this.destination = destination;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public double getValue() {
+    public double getValue(){
         return value;
     }
-
-    public void setValue(double value) {
+    public void setValue(double value){
         this.value = value;
     }
-
-    public String getPaymentMethod() {
-        return paymentMethod;
+    public String getDate(){
+        return date;
     }
-
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
+    public void setDate(String date){
+        this.date = date;
     }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getDescription() {
+    public String getDescription(){
         return description;
     }
-
-    public void setDescription(String description) {
+    public void setDescription(String description){
         this.description = description;
     }
-    public Long getUserId() {
+    public Long getUserId(){
         return userId;
     }
-
-    public void setUserId(Long userId) {
+    public void setUserId(Long userId){
         this.userId = userId;
+    }
+    public List<Long> getCategoryIds() {
+        return categoryIds;
+    }
+    public void setCategoryIds(List<Long> categoryIds) {
+        this.categoryIds = categoryIds;
     }
 
 }
