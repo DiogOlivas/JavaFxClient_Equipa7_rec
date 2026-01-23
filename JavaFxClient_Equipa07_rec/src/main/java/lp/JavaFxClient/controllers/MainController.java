@@ -4,8 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;
 import lp.JavaFxClient.services.ApiService;
+import lp.JavaFxClient_Equipa07_rec.UserSession;
 import java.util.Optional;
-
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Label;
@@ -13,6 +13,11 @@ import javafx.scene.control.Label;
 public class MainController {
 	private final ApiService api = new ApiService();
 	
+	 private String currentUser;
+
+	 @FXML 
+	 private Label lbl_username;
+	    
 	//private String ask(String message) {
 	//	TextInputDialog dialog = new TextInputDialog();
 	//	dialog.setHeaderText(message);
@@ -20,23 +25,20 @@ public class MainController {
 		
 	//	return result.orElse(null);
 	//}
-	
- private void show(String title, String text) {
-	 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-	 alert.setTitle(title);
-	 alert.setHeaderText(null);
-	 alert.setContentText(text);
-	 alert.showAndWait();	
- }
- 
- @FXML private Label lbl_username;
 
- @FXML
- private void initialize() {
-     // runs automatically when the FXML loads
-     lbl_username.setText("Welcome " +  + "!");
-     System.out.println("FXML loaded");
- }
+    @FXML
+    public void initialize() {
+   	    String username = UserSession.getInstance().getCurrentUser();
+   	    lbl_username.setText("Welcome, " + username + "!");
+   	}
+    
+    private void show(String title, String text) {
+    	Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    	alert.setTitle(title);
+    	alert.setHeaderText(null);
+    	alert.setContentText(text);
+    	alert.showAndWait();	
+    }
  
  /**
  @FXML

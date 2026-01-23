@@ -12,6 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lp.JavaFxClient_Equipa07_rec.AuthClient;
+import lp.JavaFxClient_Equipa07_rec.UserSession;
 
 //
 public class LoginController {
@@ -25,6 +26,16 @@ public class LoginController {
     @FXML
     private Label label_sign;
     
+    private MainController mainController;
+    
+    private void show(String title, String text) {
+   	 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+   	 alert.setTitle(title);
+   	 alert.setHeaderText(null);
+   	 alert.setContentText(text);
+   	 alert.showAndWait();	
+    }
+    
     @FXML
     private void initialize() {
         label_sign.setOnMouseClicked(event -> openSignUp());
@@ -32,14 +43,14 @@ public class LoginController {
 
     @FXML
     private void onLogin() {
-    	    String username = txt_user.getText();
+    	String username = txt_user.getText();
         String password = txt_pass.getText();
 
         boolean success = AuthClient.login(username, password);
 
         if (success) {
         		show("Welcome to BudgetBuddy! 😊");
-            openMenu();
+            openMain();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Invalid login.");
@@ -48,36 +59,55 @@ public class LoginController {
         }
     }
     
-    private void openMenu() {
-    	try {
-    		 FXMLLoader loader = new
-    	    FXMLLoader(getClass().getResource("/menu.fxml"));
-    		 Parent root = loader.load();
-    		 
-    		 Stage stage = new Stage();
-    		 stage.setTitle("Main menu");
-    		 stage.setScene(new Scene(root));
-    		 stage.show();
+    private void handleLogin() {
+        String username = txt_user.getText();
+        String password = txt_pass.getText();
 
-    		 Stage loginWindow = (Stage) txt_user.getScene().getWindow();
-    		 loginWindow.close();
-    		 
-    		 } catch (Exception e) {
+        boolean success = AuthClient.login(username, password);
+        if (success) {
+            UserSession.getInstance().setCurrentUser(username);
+
+            show("Welcome to BudgetBuddy! 😊");
+            openMain();
+        } else {
+        	Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Invalid login.");
+            alert.setContentText("Username or password is incorrect.");
+            alert.show();
+        }
+    }
+    
+    private void openMain() {
+    	try {   		 
+            FXMLLoader loader = new
+    	    FXMLLoader(getClass().getResource("/main.fxml"));
+    		Parent root = loader.load();
+    		
+    		Stage stage = new Stage();
+    		stage.setTitle("Main");
+    		stage.setScene(new Scene(root));
+    		stage.show();
+
+    		Stage loginWindow = (Stage) txt_user.getScene().getWindow();
+    		loginWindow.close(); 
+    	} catch (Exception e) {
     		 e.printStackTrace();
-    		 }
-    		 }
+    		 show("Error", "An unexpected error has occured, please try to log in again.");
+    	}	
+    }
     
 	private void openSignUp() {
-	try {
-		 FXMLLoader loader = new FXMLLoader(getClass().getResource("/SignUp.fxml"));
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/SignUp.fxml"));
 	        Parent root = loader.load();
 
 	        Stage stage = (Stage) txt_user.getScene().getWindow();
-
 	        stage.setScene(new Scene(root));
+	  
 	        stage.show();
 	    } catch (IOException e) {
 	        e.printStackTrace();
+   		 	show("Error", "An unexpected error has occured, please try again.");
 	    }
 	}
 	

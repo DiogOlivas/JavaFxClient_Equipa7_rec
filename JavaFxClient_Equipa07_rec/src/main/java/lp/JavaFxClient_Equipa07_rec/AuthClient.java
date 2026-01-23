@@ -6,32 +6,61 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class AuthClient {
-    public static boolean login(String username, String password) {
-        try {
-            HttpClient client = HttpClient.newHttpClient();
+	  private static final String BASE_URL = "http://localhost:8080/users";
 
-            String json = String.format("""
-                {
-                    "username": "%s",
-                    "password": "%s"
-                }
-            """, username, password);
+	    public static boolean login(String username, String password) {
+	        String endpoint = "/login";
+	        String json = String.format("""
+	                {
+	                    "username": "%s",
+	                    "password": "%s"
+	                }
+	                """, username, password);
 
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("http://localhost:8080/users/login"))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(json))
-                    .build();
+	        return sendPostRequest(endpoint, json);
+	    }
 
-            HttpResponse<Void> response =
-                    client.send(request, HttpResponse.BodyHandlers.discarding());
+	    public static boolean register(String username, String password, String email) {
+	        String endpoint = "/register";
+	        String json = String.format("""
+	                {
+	                    "username": "%s",
+	                    "password": "%s",
+	                    "email": "%s"
+	                }
+	                """, username, password, email);
 
-            return response.statusCode() == 200;
+	        return sendPostRequest(endpoint, json);
+	    }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+	    public static boolean changePassword(String username, String oldPassword, String newPassword) {
+	        String endpoint = "/change-password";
+	        String json = String.format("""
+	                {
+	                    "username": "%s",
+	                    "oldPassword": "%s",
+	                    "newPassword": "%s"
+	                }
+	                """, username, oldPassword, newPassword);
+
+	        return sendPostRequest(endpoint, json);
+	    }
+
+	    private static boolean sendPostRequest(String endpoint, String json) {
+	        try {
+	            HttpClient client = HttpClient.newHttpClient();
+	            HttpRequest request = HttpRequest.newBuilder()
+	                    .uri(URI.create(BASE_URL + endpoint))
+	                    .header("Content-Type", "application/json")
+	                    .POST(HttpRequest.BodyPublishers.ofString(json))
+	                    .build();
+
+	            HttpResponse<Void> response = client.send(request, HttpResponse.BodyHandlers.discarding());
+	            return response.statusCode() == 200;
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            return false;
+	        }
+	    }
 }
 
