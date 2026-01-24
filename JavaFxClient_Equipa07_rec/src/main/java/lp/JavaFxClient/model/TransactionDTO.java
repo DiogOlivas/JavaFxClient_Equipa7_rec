@@ -23,7 +23,7 @@ public class TransactionDTO {
         this.paymentMethod = paymentMethod;
         this.categoryIds = categoryIds;
     }
-    //
+    
     public Long getId(){
         return id;
     }

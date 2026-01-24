@@ -26,7 +26,7 @@ public class NewTransactionController {
 
     private final ApiService api = new ApiService();
     private Long editingId = null;
-
+//
     public void loadTransaction(TransactionDTO t){
         editingId = t.getId();
         formTitle.setText("Edit transaction");
