@@ -8,18 +8,20 @@ public class TransactionDTO {
     private String date;
     private String description;
     private Long userId; 
-    private List<Long> categoryIds; //list of category IDs 
+    private String paymentMethod;
+    private String category; //list of category IDs 
     
 
     public TransactionDTO() {}
 
-    public TransactionDTO(Long id, double value, String date, String description, Long userId, List<Long> categoryIds) {
+    public TransactionDTO(Long id, double value, String date, String paymentMethod, String description, Long userId, String category) {
         this.id = id;
         this.value = value;
         this.description = description;
         this.userId = userId;
         this.date = date;
-        this.categoryIds = categoryIds;
+        this.paymentMethod = paymentMethod;
+        this.category = category;
     }
     //
     public Long getId(){
@@ -52,11 +54,17 @@ public class TransactionDTO {
     public void setUserId(Long userId){
         this.userId = userId;
     }
-    public List<Long> getCategoryIds() {
-        return categoryIds;
+    public String getCategory(){
+        return category;
     }
-    public void setCategoryIds(List<Long> categoryIds) {
-        this.categoryIds = categoryIds;
+    public void setCategory(String category){
+        this.category = category;
+    }
+    public String getPaymentMethod(){
+        return paymentMethod;
+    }
+    public void setPaymentMethod(String paymentMethod){
+        this.paymentMethod = paymentMethod;
     }
 
 }
