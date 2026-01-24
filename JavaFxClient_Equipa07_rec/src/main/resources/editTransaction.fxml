@@ -13,7 +13,7 @@
    <children>
       <ImageView fitHeight="544.0" fitWidth="919.0" layoutX="-210.0" layoutY="-121.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../OneDrive/Imágenes/project/black.jpg" />
+            <Image url="@images/background.jpg" />
          </image>
       </ImageView>
       <TextField id="txt_value" layoutX="220.0" layoutY="155.0" />
@@ -27,9 +27,9 @@
       <Text fill="WHITE" layoutX="221.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment method:" />
       <Button id="btn_save" layoutX="273.0" layoutY="348.0" mnemonicParsing="false" text="Save" />
       <Label id="lbl_cancel" layoutX="276.0" layoutY="377.0" text="Cancel" textFill="WHITE" underline="true" />
-      <ImageView fitHeight="84.0" fitWidth="149.0" layoutX="232.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="101.0" fitWidth="106.0" layoutX="244.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../Downloads/1769011097555-removebg-preview.png" />
+            <Image url="@images/Logo_BugdetBuddy.png" />
          </image>
       </ImageView>
       <TextField id="txt_date" layoutX="219.0" layoutY="296.0" prefHeight="25.0" prefWidth="149.0" />

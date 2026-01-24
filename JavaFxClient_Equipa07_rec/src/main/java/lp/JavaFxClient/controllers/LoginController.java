@@ -62,7 +62,7 @@ public class LoginController {
     
     @FXML
     private void handleLogin() {
-        String username = txt_user.getText();
+        String username = txt_user.getText();	
         String password = txt_pass.getText();
 
         boolean success = AuthClient.login(username, password);
