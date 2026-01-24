@@ -37,7 +37,12 @@ public class ApiService {
              return "ERROR: " + e.getMessage();
              }
          }
+<<<<<<< HEAD
          public String put(String path, String json) {
+=======
+         //put method
+     public String put(String path, String json) {
+>>>>>>> 3bfd621060aa0181c0f40de1356b1ed1142ec0d2
         try {
         HttpRequest.BodyPublisher body =
             (json == null || json.isEmpty())
@@ -54,7 +59,7 @@ public class ApiService {
             }
         }
 
-         public String delete(String path) {
+     public String delete(String path) {
          try {
              HttpRequest request = HttpRequest.newBuilder()
                  .uri(URI.create(BASE_URL + path))
