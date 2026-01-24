@@ -9,7 +9,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import lp.JavaFxClient.model.TransactionDTO;
 import lp.JavaFxClient.services.ApiService;
-
+ 
 public class TransactionForm {
     @FXML private Label formTitle;
     @FXML private TextField txtValue;

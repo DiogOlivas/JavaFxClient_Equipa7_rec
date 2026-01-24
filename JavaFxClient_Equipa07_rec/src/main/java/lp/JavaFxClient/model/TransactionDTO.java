@@ -1,6 +1,6 @@
 package lp.JavaFxClient.model;
 
-import java.util.List;
+
 
 public class TransactionDTO {
 	private Long id;

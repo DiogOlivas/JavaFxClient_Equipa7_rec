@@ -32,7 +32,7 @@ public class ApiService {
              .header("Content-Type", "application/json")
              .POST(body)
              .build();
-         return client.send(request, HttpResponse.BodyHandlers.ofString()).body();
+         return client.send(request, HttpResponse.BodyHandlers.ofString()).body(); 
          }catch (Exception e) {
              return "ERROR: " + e.getMessage();
              }
