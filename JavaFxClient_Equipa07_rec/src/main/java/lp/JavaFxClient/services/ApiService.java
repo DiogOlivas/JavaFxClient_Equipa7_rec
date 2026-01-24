@@ -37,8 +37,24 @@ public class ApiService {
              return "ERROR: " + e.getMessage();
              }
          }
+     public String put(String path, String json) {
+        try {
+        HttpRequest.BodyPublisher body =
+            (json == null || json.isEmpty())
+                ? HttpRequest.BodyPublishers.noBody()
+                : HttpRequest.BodyPublishers.ofString(json);
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(BASE_URL + path))
+            .header("Content-Type", "application/json")
+            .PUT(body)
+            .build();
+        return client.send(request, HttpResponse.BodyHandlers.ofString()).body();
+        }catch (Exception e) {
+            return "ERROR: " + e.getMessage();
+            }
+        }
 
-         public String delete(String path) {
+     public String delete(String path) {
          try {
              HttpRequest request = HttpRequest.newBuilder()
                  .uri(URI.create(BASE_URL + path))

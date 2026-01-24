@@ -9,8 +9,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.stage.Stage;
 import lp.JavaFxClient.model.CategoryDTO;
 import lp.JavaFxClient.services.ApiService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,7 +24,7 @@ public class NewCategoryController {
 
     public void loadCategory(CategoryDTO c){
         editingId = c.getId();
-        formTitle.setText("New Category");
+        formTitle.setText("Edit Category");
         txtName.setText(c.getNome());
         txtBudget.setText(String.valueOf(c.getBudget()));
         txtDescription.setText(c.getDescricao());
