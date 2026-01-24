@@ -6,7 +6,7 @@ public class TransactionDTO {
 	private Long id;
     private double value;
     private String date;
-    private String description;
+    private String description; 
     private Long userId; 
     private String paymentMethod;
     private String category; //list of category IDs 

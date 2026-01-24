@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Label;
+import javafx.scene.control.Label; 
 import lp.JavaFxClient.model.CategoryDTO;
 import lp.JavaFxClient.services.ApiService;
 import com.fasterxml.jackson.databind.ObjectMapper;

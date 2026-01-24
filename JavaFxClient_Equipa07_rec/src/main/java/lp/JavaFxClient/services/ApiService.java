@@ -28,7 +28,7 @@ public class ApiService {
                  ? HttpRequest.BodyPublishers.noBody()
                  : HttpRequest.BodyPublishers.ofString(json);
          HttpRequest request = HttpRequest.newBuilder()
-             .uri(URI.create(BASE_URL + path))
+             .uri(URI.create(BASE_URL + path)) 
              .header("Content-Type", "application/json")
              .POST(body)
              .build();
