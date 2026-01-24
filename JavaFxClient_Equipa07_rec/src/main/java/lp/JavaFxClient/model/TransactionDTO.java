@@ -14,7 +14,7 @@ public class TransactionDTO {
 
     public TransactionDTO() {}
 
-    public TransactionDTO(Long id, double value, String date, String description, Long userId,String paymentMethod, String categoryIds) {
+    public TransactionDTO(Long id, double value, String date, String description, Long userId,String paymentMethod, String category) {
         this.id = id;
         this.value = value;
         this.description = description;
