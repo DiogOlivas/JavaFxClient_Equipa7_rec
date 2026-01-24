@@ -18,15 +18,15 @@
          </image>
       </ImageView>
       <Label id="Lbl_name" layoutX="91.0" layoutY="83.0" text="Username:" textAlignment="CENTER" textFill="#e4dddd" />
-      <TextField fx:id="txt_user" layoutX="153.0" layoutY="79.0" />
-      <Button fx:id="btn_signup" layoutX="190.0" layoutY="245.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="70.0" text="Sign Up" onAction="#CreateUser"/>
+      <TextField id="txt_user" fx:id="txt_user" layoutX="153.0" layoutY="79.0" />
+      <Button fx:id="btn_signup" layoutX="190.0" layoutY="245.0" mnemonicParsing="false" onAction="#CreateUser" prefHeight="36.0" prefWidth="70.0" text="Sign Up" />
       <Label id="LblNome" layoutX="170.0" layoutY="36.0" text="Create Account" textAlignment="CENTER" textFill="#e4dddd">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
       <Label id="Lbl_email" layoutX="115.0" layoutY="123.0" text="Email:" textAlignment="CENTER" textFill="#e4dddd" />
-      <TextField fx:id="txt_email" layoutX="153.0" layoutY="119.0" />
+      <TextField id="txt_email" fx:id="txt_email" layoutX="153.0" layoutY="119.0" />
       <Label id="Lbl_pass" layoutX="93.0" layoutY="164.0" text="Password:" textAlignment="CENTER" textFill="#e4dddd" />
       <Label id="Lbl_passConf" layoutX="48.0" layoutY="205.0" text="Confirm Password:" textAlignment="CENTER" textFill="#e4dddd" />
       <Label layoutX="160.0" layoutY="290.0" text="Already have an account?" textFill="WHITE" />
@@ -35,7 +35,7 @@
             <Image url="@images/Logo_BugdetBuddy.png" />
          </image>
       </ImageView>
-      <Label fx:id="lbl_logIn" layoutX="208.0" layoutY="308.0" text="Log in!" textAlignment="CENTER" textFill="WHITE" underline="true">
+      <Label id="lbl_logIn" fx:id="lbl_logIn" layoutX="208.0" layoutY="308.0" text="Log in!" textAlignment="CENTER" textFill="WHITE" underline="true">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -43,7 +43,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <PasswordField fx:id="txt_pass" layoutX="153.0" layoutY="160.0" />
-      <PasswordField fx:id="txt_passConf" layoutX="153.0" layoutY="201.0" />
+      <PasswordField id="txt_pass" fx:id="txt_pass" layoutX="153.0" layoutY="160.0" />
+      <PasswordField id="txt_passConf" fx:id="txt_passConf" layoutX="153.0" layoutY="201.0" />
    </children>
 </AnchorPane>
