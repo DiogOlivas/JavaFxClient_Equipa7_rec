@@ -22,7 +22,8 @@
             <Font name="System Bold" size="28.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="226.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Value:" />
+      <Text fill="WHITE" layoutX="221.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Value:" />
+      <Text fill="WHITE" layoutX="221.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" />
       <TextField id="txt_pay" layoutX="219.0" layoutY="252.0" prefHeight="25.0" prefWidth="149.0" />
       <Text fill="WHITE" layoutX="221.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment method:" />
       <Button id="btn_save" layoutX="273.0" layoutY="348.0" mnemonicParsing="false" text="Save" />
@@ -35,6 +36,5 @@
       <TextField id="txt_date" layoutX="219.0" layoutY="296.0" prefHeight="25.0" prefWidth="149.0" />
       <Text fill="WHITE" layoutX="220.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
       <TextField id="txt_desc" layoutX="220.0" layoutY="204.0" />
-      <Text fill="WHITE" layoutX="225.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" />
    </children>
 </Pane>
