@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import lp.JavaFxClient.model.CategoryDTO;
 import lp.JavaFxClient.services.ApiService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-//
+
 public class NewCategoryController {  
     @FXML private Label formTitle;
     @FXML private TextField txtName;
