@@ -30,7 +30,12 @@ public class LoginController {
     @FXML
     private Label lbl_sign;
     
-    private MainController mainController;
+    private void message(String title) {
+		 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		 alert.setTitle(title);
+		 alert.setHeaderText(null);
+		 alert.showAndWait();	
+   }
     
     private void show(String title, String text) {
    	 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -42,26 +47,19 @@ public class LoginController {
     
     @FXML
     private void initialize() {
-    	txt_user.clear();
+    	    txt_user.clear();
         txt_pass.clear();
     
         lbl_sign.setOnMouseClicked(event -> openSignUp());
     }
     
-    /**
-    @FXML
-    private void initializeSignUp() {
-        lbl_sign.setOnMouseClicked(event -> openSignUp());
-    }
-    
     @FXML
     private void initializeMenu() {
-    		btn_login.setOnMouseClicked(event -> handleLogin());
+    		btn_login.setOnMouseClicked(event -> onLogin());
     }
-    **/
     
     @FXML
-    private void handleLogin() {
+    private void onLogin() {
         String username = txt_user.getText();	
         String password = txt_pass.getText();
 
@@ -69,7 +67,7 @@ public class LoginController {
         if (success) {
             UserSession.getInstance().setCurrentUser(username);
 
-            show("Welcome to BudgetBuddy! 😊");
+            message("Welcome to BudgetBuddy! 😊");
             openMain();
         } else {
         	Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -112,12 +110,6 @@ public class LoginController {
    		 	show("Error", "An unexpected error has occured, please try again.");
 	    }
 	}
-	
-	private void show(String title) {
-		 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		 alert.setTitle(title);
-		 alert.setHeaderText(null);
-		 alert.showAndWait();	
-    }
+
 }
 

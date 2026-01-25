@@ -3,15 +3,9 @@ package lp.JavaFxClient.controllers;
 
 import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.stage.Stage;
 import lp.JavaFxClient.model.TransactionDTO;
 import lp.JavaFxClient.services.ApiService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,8 +28,6 @@ public class NewTransactionController {
         txtDescription.setText(t.getDescription());
         txtPayementMethod.setText(t.getPaymentMethod());
         txtDate.setText(t.getDate());
-
-
     }
 
     @FXML
