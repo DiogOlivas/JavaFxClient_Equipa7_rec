@@ -6,19 +6,15 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="369.0" prefWidth="322.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lp.JavaFxClient.controllers.ProfileController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="319.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lp.JavaFxClient.controllers.ProfileController">
    <children>
       <ImageView fitHeight="406.0" fitWidth="749.0" layoutX="-284.0" layoutY="-31.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/background.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="112.0" fitWidth="146.0" layoutX="105.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/Logo_BugdetBuddy.png" />
          </image>
       </ImageView>
       <Text fill="WHITE" layoutX="83.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
@@ -31,10 +27,35 @@
       <Button id="bt_email" layoutX="235.0" layoutY="181.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="28.0" text="✎" />
       <Button id="bt_budget" layoutX="235.0" layoutY="241.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="28.0" text="✎" />
       <Text fill="WHITE" layoutX="98.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Forgot yourt password?" />
-      <Label id="lbl_changepass" layoutX="120.0" layoutY="311.0" text="Change it here!" textFill="WHITE" underline="true" onAction="#changePassword">
+      <Label id="lbl_changePass" layoutX="120.0" layoutY="311.0" onAction="#paneView" text="Change it here!" textFill="WHITE" underline="true">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font>
       </Label>
+      <ImageView fitHeight="112.0" fitWidth="146.0" layoutX="105.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Logo_BugdetBuddy.png" />
+         </image>
+      </ImageView>
+      <Pane id="pane_pass" layoutY="-1.0" prefHeight="370.0" prefWidth="326.0">
+         <children>
+            <ImageView fitHeight="385.0" fitWidth="672.0" layoutX="-253.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/background.jpg" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="127.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Old Password" />
+            <Text fill="WHITE" layoutX="124.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Password" />
+            <TextField id="txt_oldPass" layoutX="87.0" layoutY="136.0" />
+            <TextField id="txt_newPass" layoutX="87.0" layoutY="209.0" />
+            <Button id="bt_changePass" layoutX="93.0" layoutY="265.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="137.0" text="Submit New Password" OnAction="#changePassword" />
+            <ImageView fitHeight="112.0" fitWidth="146.0" layoutX="105.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/Logo_BugdetBuddy.png" />
+               </image>
+            </ImageView>
+            <Button id="bt_cancel" layoutY="349.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Cancel.." OnAction="#paneView" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
