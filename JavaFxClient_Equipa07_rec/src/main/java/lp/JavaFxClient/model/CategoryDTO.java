@@ -37,20 +37,20 @@ public class CategoryDTO {
 		this.userId = userId;
 	}
 
-    public String getNome() {
+    public String getName() {
         return name;
     }
 
-    public void setNome(String nome) {
-        this.name = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDescricao() {
+    public String getDescription() {
         return desc;
     }
 
-    public void setDescricao(String descricao) {
-        this.desc = descricao;
+    public void setDescription(String description) {
+        this.desc = description;
     }
 
     public double getBudget() {

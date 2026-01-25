@@ -2,18 +2,15 @@ package lp.JavaFxClient.controllers;
 
 import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import lp.JavaFxClient.model.CategoryDTO;
 import lp.JavaFxClient.services.ApiService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+//
 public class NewCategoryController {  
+
     @FXML private Label formTitle;
     @FXML private TextField txtName;
     @FXML private TextField txtBudget;
@@ -22,32 +19,33 @@ public class NewCategoryController {
     private final ApiService api = new ApiService();
     private Long editingId = null;
 
+    @FXML
+    public void initialize() {
+        formTitle.setText("New Category");
+    }
     public void loadCategory(CategoryDTO c){
         editingId = c.getId();
         formTitle.setText("Edit Category");
-        txtName.setText(c.getNome());
+        txtName.setText(c.getName());
         txtBudget.setText(String.valueOf(c.getBudget()));
-        txtDescription.setText(c.getDescricao());
+        txtDescription.setText(c.getDescription());
     }
-    
     @FXML
     public void onSave(){
         try{
             CategoryDTO dto = new CategoryDTO();
-            dto.setNome(txtName.getText());
+            dto.setName(txtName.getText());
             dto.setBudget(Double.parseDouble(txtBudget.getText()));
-            dto.setDescricao(txtDescription.getText());
+            dto.setDescription(txtDescription.getText());
 
+            ObjectMapper mapper = new ObjectMapper();
+            String json = mapper.writeValueAsString(dto);
             String result;
 
             if(editingId == null){
-                ObjectMapper mapper = new ObjectMapper();
-                String json = mapper.writeValueAsString(dto);
                 result = api.post("/category",json);
             }else{
                 dto.setId(editingId);
-                ObjectMapper mapper = new ObjectMapper();
-                String json = mapper.writeValueAsString(dto);
                 result = api.put("/category/" + editingId, json);
             }
 
@@ -58,10 +56,8 @@ public class NewCategoryController {
             new Alert(AlertType.ERROR, "Error: "+ e.getMessage()).showAndWait();
         }
     }
-    
     @FXML
     public void onCancel(){
         txtName.getScene().getWindow().hide();
     }
-
 }

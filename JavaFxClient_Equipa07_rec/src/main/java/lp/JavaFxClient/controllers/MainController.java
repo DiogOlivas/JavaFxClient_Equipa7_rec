@@ -3,9 +3,6 @@ package lp.JavaFxClient.controllers;
 import javafx.fxml.FXML;
 import lp.JavaFxClient.model.TransactionDTO;
 import lp.JavaFxClient.services.ApiService;
-
-import java.io.IOException;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.fxml.FXMLLoader;
@@ -15,47 +12,51 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lp.JavaFxClient.model.CategoryDTO;
-import lp.JavaFxClient.controllers.NewTransactionController;
-import lp.JavaFxClient.controllers.NewCategoryController;
+
 
 public class MainController {
+
 	private final ApiService api = new ApiService();
     private void show(String title, String text) {
+
 	 Alert alert = new Alert(Alert.AlertType.INFORMATION);
 	 alert.setTitle(title);
 	 alert.setHeaderText(null);
 	 alert.setContentText(text);
 	 alert.showAndWait();	
+
  }
  
  //Transaction Table
- @FXML private TableView<TransactionDTO> tableTransactions;
+ @FXML private TableView<TransactionDTO> tbl_transactions;
  @FXML private TableColumn<TransactionDTO, Double> tbl_value;
  @FXML private TableColumn<TransactionDTO, String> tbl_desc;
  @FXML private TableColumn<TransactionDTO, String> tbl_pay;
  @FXML private TableColumn<TransactionDTO, String> tbl_date;
 
  //Category Table
- @FXML private TableView<CategoryDTO> tableCategories;
+ @FXML private TableView<CategoryDTO> tbl_category;
  @FXML private TableColumn<CategoryDTO, String> tbl_name;
 
- //butões 
- @FXML private Button btnAddTransaction; 
- @FXML private Button btnEditTransaction;
- @FXML private Button btnDeleteTransaction;
- @FXML private Button btnAddCategory;
- @FXML private Button btnEditCategory;
- @FXML private Button btnDeleteCategory;
+ //butões
+    @FXML private Button add_tran; 
+    @FXML private Button btnEditTransaction;
+    @FXML private Button btnDeleteTransaction;
+
+    @FXML private Button add_cat;
+    @FXML private Button btnEditCategory;
+    @FXML private Button btnDeleteCategory;
 
  private final ObjectMapper mapper = new ObjectMapper();
 
+ @FXML
  public void initialize(){
 	 tbl_value.setCellValueFactory(new PropertyValueFactory<>("value"));
 	 tbl_desc.setCellValueFactory(new PropertyValueFactory<>("description"));
 	 tbl_pay.setCellValueFactory(new PropertyValueFactory<>("paymentMethod"));
 	 tbl_date.setCellValueFactory(new PropertyValueFactory<>("date"));
 
-	 tbl_name.setCellValueFactory(new PropertyValueFactory<>("nome"));
+	 tbl_name.setCellValueFactory(new PropertyValueFactory<>("name"));
 	 loadTransactions();
 	 loadCategories();
 
@@ -68,29 +69,31 @@ public class MainController {
 			return;
 		}
 		TransactionDTO[] transactions = mapper.readValue(json, TransactionDTO[].class); // Desserializa o JSON em um array de TransactionDTO
-		tableTransactions.getItems().setAll(transactions); // Atualiza a tabela com as transações
+		tbl_transactions.getItems().setAll(transactions); // Atualiza a tabela com as transações
 	} catch (Exception e){
 		show("Error", "Failed to load transactions: " + e.getMessage());
 	}
  }
  
-	private void loadCategories(){
-		try{
-			String json = api.get("/category");
-			if(json.startsWith("ERROR")){
-				show("Error", json);
-				return;
-			}
-			CategoryDTO[] categories = mapper.readValue(json, CategoryDTO[].class); // Desserializa o JSON em um array de CategoryDTO
-			tableCategories.getItems().setAll(categories); // Atualiza a tabela com as categorias
-		} catch (Exception e){
-			show("Error", "Failed to load categories: " + e.getMessage());
+private void loadCategories(){
+	try{
+		String json = api.get("/category");
+		if(json.startsWith("ERROR")){
+			show("Error", json);
+			return;
 		}
+		CategoryDTO[] category = mapper.readValue(json, CategoryDTO[].class); // Desserializa o JSON em um array de CategoryDTO
+		tbl_category.getItems().setAll(category); // Atualiza a tabela com as categorias
+	} catch (Exception e){
+		show("Error", "Failed to load categories: " + e.getMessage());
 	}
+}
+
  @FXML 
  public void onAddTransaction(){
 	openTransactionForm(null);
  }
+ 
  private void openTransactionForm(TransactionDTO transaction){
 	try{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/lp/JavaFxClient/views/NewTransaction.fxml"));
@@ -114,7 +117,7 @@ public class MainController {
   }
    @FXML
     public void onEditTransaction() {
-        TransactionDTO selectedTransaction = tableTransactions.getSelectionModel().getSelectedItem();
+        TransactionDTO selectedTransaction = tbl_transactions.getSelectionModel().getSelectedItem();
 		if (selectedTransaction != null) {
 			openTransactionForm(selectedTransaction);
 		} else {
@@ -123,7 +126,7 @@ public class MainController {
 	}
 	@FXML
 	public void onDeleteTransaction() {
-		TransactionDTO selectedTransaction = tableTransactions.getSelectionModel().getSelectedItem();
+		TransactionDTO selectedTransaction = tbl_transactions.getSelectionModel().getSelectedItem();
 		if (selectedTransaction != null) {
 			try {
 				String result = api.delete("/transaction/" + selectedTransaction.getId());
@@ -143,7 +146,7 @@ public class MainController {
 
 	private void openCategoryForm(CategoryDTO c) {
     try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("lp/JavaFxClient/views/CategoryForm.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/lp/JavaFxClient/views/NewCategory.fxml"));
         Parent root = loader.load();
 
         // Passa os dados para o controller do formulário
@@ -182,7 +185,7 @@ public class MainController {
 	}
 	@FXML
 	public void onEditCategory() {
-        CategoryDTO selectedCategory = tableCategories.getSelectionModel().getSelectedItem();
+        CategoryDTO selectedCategory = tbl_category.getSelectionModel().getSelectedItem();
 		if (selectedCategory != null) {
 			openCategoryForm(selectedCategory);
 		} else {
@@ -191,7 +194,7 @@ public class MainController {
 	}
 	@FXML
 	public void onDeleteCategory() {
-		CategoryDTO selectedCategory = tableCategories.getSelectionModel().getSelectedItem();
+		CategoryDTO selectedCategory = tbl_category.getSelectionModel().getSelectedItem();
 		if (selectedCategory != null) {
 			try {
 				String result = api.delete("/category/" + selectedCategory.getId());
@@ -207,23 +210,6 @@ public class MainController {
 		} else {
 			show("Warning", "Please select a category to delete.");
 		}
-	}
-	
-	@FXML
-	public void openAccountSettings() {
-		 try {
-		        FXMLLoader loader = new FXMLLoader(getClass().getResource("/account.fxml"));
-		        Parent root = loader.load();
-
-		        Stage newStage = new Stage();         
-		        newStage.setTitle("Account Settings");
-		        newStage.setScene(new Scene(root));
-		        newStage.show();                      
-
-		    } catch (IOException e) {
-		        e.printStackTrace();
-		        show("Error", "An unexpected error has occurred, please try again.");
-		    }
 	}
 	
 }
