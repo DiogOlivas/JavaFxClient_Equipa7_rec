@@ -33,7 +33,7 @@
       <TextField fx:id="txtBudget" layoutX="223.0" layoutY="223.0" prefHeight="25.0" prefWidth="149.0" />
       <Text fill="WHITE" layoutX="222.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Budget:" />
 
-      <Button layoutX="276.0" layoutY="321.0" mnemonicParsing="false" text="Save" onAction="#onSave" />
+      <Button fx:id="btn_save" layoutX="276.0" layoutY="321.0" mnemonicParsing="false" text="Save" />
 
       <Label fx:id="lbl_cancel" layoutX="279.0" layoutY="353.0" text="Cancel" textFill="WHITE" underline="true" />
 

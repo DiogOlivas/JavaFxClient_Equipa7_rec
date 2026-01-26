@@ -47,7 +47,7 @@ public class LoginController {
     
     @FXML
     private void initialize() {
-    	    txt_user.clear();
+    	txt_user.clear();
         txt_pass.clear();
     
         lbl_sign.setOnMouseClicked(event -> openSignUp());
