@@ -5,10 +5,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
+import javafx.scene.Cursor;
 import lp.JavaFxClient.model.CategoryDTO;
 import lp.JavaFxClient.services.ApiService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-//
+
 public class NewCategoryController {  
 
     @FXML private Label formTitle;
@@ -16,12 +17,18 @@ public class NewCategoryController {
     @FXML private TextField txtBudget;
     @FXML private TextField txtDescription;
 
+    @FXML private Label lbl_cancel;
+
     private final ApiService api = new ApiService();
     private Long editingId = null;
 
     @FXML
     public void initialize() {
         formTitle.setText("New Category");
+
+        lbl_cancel.setCursor(Cursor.HAND);
+        lbl_cancel.setOnMouseClicked(event -> onCancel());
+        
     }
     public void loadCategory(CategoryDTO c){
         editingId = c.getId();
@@ -56,6 +63,7 @@ public class NewCategoryController {
             new Alert(AlertType.ERROR, "Error: "+ e.getMessage()).showAndWait();
         }
     }
+    
     @FXML
     public void onCancel(){
         txtName.getScene().getWindow().hide();
