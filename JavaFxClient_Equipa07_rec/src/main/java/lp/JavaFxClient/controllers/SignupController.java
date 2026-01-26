@@ -68,7 +68,7 @@ public class SignupController {
 	  	   	 		"password": "%s"
 	  	   	 		}
 	  	   	 		""".formatted(username, email, password);
-	  	   	 	show("Welcome to BudgetBuddy! 😊", api.post("/users", json));
+	  	   	 	api.post("/users", json);
 	  	   	
 	  	   	 	try {
 	  	   	 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
