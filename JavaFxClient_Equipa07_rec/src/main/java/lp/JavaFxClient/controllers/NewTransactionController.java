@@ -8,8 +8,10 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import lp.JavaFxClient.model.TransactionDTO;
 import lp.JavaFxClient.services.ApiService;
+
+import java.time.LocalDate;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
-import javafx.scene.Cursor;
 
 
 public class NewTransactionController {
@@ -18,12 +20,12 @@ public class NewTransactionController {
     @FXML private TextField txt_desc;
     @FXML private TextField txt_pay;
     @FXML private TextField txt_date;
-
-     @FXML private Label lbl_cancel;
+    @FXML private Label lbl_cancel;
 
     private final ApiService api = new ApiService();
     private Long editingId = null;
-
+    private final ObjectMapper mapper = new ObjectMapper();
+    
     @FXML
     public void initialize() {
         formTitle.setText("New Transaction");
@@ -36,27 +38,31 @@ public class NewTransactionController {
         txt_value.setText(String.valueOf(t.getValue()));
         txt_desc.setText(t.getDescription());
         txt_pay.setText(t.getPaymentMethod());
-        txt_date.setText(t.getDate());
+        txt_date.setText(txt_date.getText());
     }
 
     @FXML
     public void onSave(){
         try{
             TransactionDTO dto = new TransactionDTO();
+            if (txt_value.getText().isBlank()) {
+                show("Error!","Value is required");
+                return;
+            }
+            
             dto.setValue(Double.parseDouble(txt_value.getText()));
             dto.setDescription(txt_desc.getText());
             dto.setPaymentMethod(txt_pay.getText());
-            dto.setDate(txt_date.getText());
+            dto.setDate(LocalDate.parse(txt_date.getText()));
 
             String result;
 
             if(editingId == null){
-                ObjectMapper mapper = new ObjectMapper();
                 String json = mapper.writeValueAsString(dto);
                 result = api.post("/transaction",json);
             }else{
                 dto.setId(editingId);
-                ObjectMapper mapper = new ObjectMapper();
+
                 String json = mapper.writeValueAsString(dto);
                 result = api.put("/transaction/" + editingId, json);
             }
@@ -73,4 +79,12 @@ public class NewTransactionController {
     public void onCancel(){
         txt_value.getScene().getWindow().hide();
     }
+    
+    private void show(String title, String text) {
+      	 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      	 alert.setTitle(title);
+      	 alert.setHeaderText(null);
+      	 alert.setContentText(text);
+      	 alert.showAndWait();	
+       }
 }

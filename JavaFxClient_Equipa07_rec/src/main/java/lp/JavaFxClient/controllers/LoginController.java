@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import lp.JavaFxClient_Equipa07_rec.AuthClient;
 import lp.JavaFxClient_Equipa07_rec.UserSession;
 
-//
+
 public class LoginController {
 
     @FXML
@@ -29,13 +29,6 @@ public class LoginController {
     
     @FXML
     private Label lbl_sign;
-    
-    private void message(String title) {
-		 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		 alert.setTitle(title);
-		 alert.setHeaderText(null);
-		 alert.showAndWait();	
-   }
     
     private void show(String title, String text) {
    	 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -67,7 +60,7 @@ public class LoginController {
         if (success) {
             UserSession.getInstance().setCurrentUser(username);
 
-            message("Welcome to BudgetBuddy! 😊");
+            show("Acces granted.","Welcome to BudgetBuddy! 😊");
             openMain();
         } else {
         	Alert alert = new Alert(Alert.AlertType.ERROR);

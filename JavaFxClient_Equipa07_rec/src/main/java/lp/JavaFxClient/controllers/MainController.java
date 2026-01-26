@@ -150,19 +150,17 @@ private void loadCategories(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/lp/JavaFxClient/views/NewCategory.fxml"));
         Parent root = loader.load();
 
-        // Passa os dados para o controller do formulário
         NewCategoryController controller = loader.getController();
         if (c != null) {
-            controller.loadCategory(c); // preencher campos existentes
+            controller.loadCategory(c); 
         }
 
         Stage stage = new Stage();
-		stage.initModality(Modality.APPLICATION_MODAL); // Bloqueia a janela principal até que esta seja fechada
+		stage.initModality(Modality.APPLICATION_MODAL); 
         stage.setScene(new Scene(root));
 		stage.setTitle(c == null ? "New Category" : "Edit Category");
         stage.showAndWait();
 
-        // Recarrega categorias depois de salvar
         loadCategories();
 
     } catch (Exception e) {
@@ -212,25 +210,6 @@ private void loadCategories(){
 			show("Warning", "Please select a category to delete.");
 		}
 	}
-	   @FXML
-    public void lblEditTransactionClicked() {
-        onEditTransaction();
-    }
-
-    @FXML
-    public void lblDeleteTransactionClicked() {
-        onDeleteTransaction();
-    }
-
-    @FXML
-    public void lblEditCategoryClicked() {
-        onEditCategory();
-    }
-
-    @FXML
-    public void lblDeleteCategoryClicked() {
-        onDeleteCategory();
-    }
 
     @FXML
     public void openAccountSettings() {

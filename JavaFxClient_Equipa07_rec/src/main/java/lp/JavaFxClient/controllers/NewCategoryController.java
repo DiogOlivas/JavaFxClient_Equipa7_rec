@@ -16,7 +16,6 @@ public class NewCategoryController {
     @FXML private TextField txtName;
     @FXML private TextField txtBudget;
     @FXML private TextField txtDescription;
-
     @FXML private Label lbl_cancel;
 
     private final ApiService api = new ApiService();
