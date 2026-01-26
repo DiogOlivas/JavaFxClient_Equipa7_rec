@@ -27,25 +27,26 @@ public class MainController {
 
  }
  
- //Transaction Table
  @FXML private TableView<TransactionDTO> tbl_transactions;
  @FXML private TableColumn<TransactionDTO, Double> tbl_value;
  @FXML private TableColumn<TransactionDTO, String> tbl_desc;
  @FXML private TableColumn<TransactionDTO, String> tbl_pay;
  @FXML private TableColumn<TransactionDTO, String> tbl_date;
 
- //Category Table
  @FXML private TableView<CategoryDTO> tbl_category;
+ 
  @FXML private TableColumn<CategoryDTO, String> tbl_name;
 
- //butões
     @FXML private Button add_tran; 
-    @FXML private Button btnEditTransaction;
-    @FXML private Button btnDeleteTransaction;
-
     @FXML private Button add_cat;
-    @FXML private Button btnEditCategory;
-    @FXML private Button btnDeleteCategory;
+
+	@FXML private Label lbl_tranEdit;
+    @FXML private Label lbl_tranDelete;
+    @FXML private Label lbl_catEdit;
+    @FXML private Label lbl_catDelete;
+    @FXML private Label lbl_account;
+
+
 
  private final ObjectMapper mapper = new ObjectMapper();
 
@@ -211,5 +212,28 @@ private void loadCategories(){
 			show("Warning", "Please select a category to delete.");
 		}
 	}
-	
+	   @FXML
+    public void lblEditTransactionClicked() {
+        onEditTransaction();
+    }
+
+    @FXML
+    public void lblDeleteTransactionClicked() {
+        onDeleteTransaction();
+    }
+
+    @FXML
+    public void lblEditCategoryClicked() {
+        onEditCategory();
+    }
+
+    @FXML
+    public void lblDeleteCategoryClicked() {
+        onDeleteCategory();
+    }
+
+    @FXML
+    public void openAccountSettings() {
+        show("Account", "Account settings clicked!");
+    }
 }

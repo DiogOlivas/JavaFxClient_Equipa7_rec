@@ -12,50 +12,54 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx:controller=&quot;your.package.YourController&quot;">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="400.0" prefWidth="600.0"
+      xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="lp.JavaFxClient.controllers.MainController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/background.jpg" />
          </image>
       </ImageView>
-      <TableView layoutX="8.0" layoutY="48.0" prefHeight="337.0" prefWidth="435.0">
+      <TableView fx:id="tbl_transactions" layoutX="8.0" layoutY="48.0" prefHeight="337.0" prefWidth="435.0">
          <columns>
-            <TableColumn id="tbl_value" prefWidth="75.0" text="Value" />
-            <TableColumn id="tbl_desc" prefWidth="150.00000762939453" text="Description" />
-            <TableColumn id="tbl_pay" prefWidth="115.33329772949219" text="Payment method" />
-            <TableColumn id="tbl_pay" prefWidth="91.33331298828125" text="Date" />
+            <TableColumn fx:id="tbl_value" prefWidth="75.0" text="Value" />
+            <TableColumn fx:id="tbl_desc" prefWidth="150.0" text="Description" />
+            <TableColumn fx:id="tbl_pay" prefWidth="115.0" text="Payment method" />
+            <TableColumn fx:id="tbl_date" prefWidth="91.0" text="Date" />
          </columns>
          <effect>
             <DropShadow>
                <color>
-                  <Color green="0.7547216415405273" blue="1.0" />
+                  <Color green="0.7547" blue="1.0" />
                </color>
             </DropShadow>
          </effect>
       </TableView>
-      <TableView id="tbl_category" layoutX="455.0" layoutY="48.0" prefHeight="337.0" prefWidth="136.0">
+      <TableView fx:id="tbl_category" layoutX="455.0" layoutY="48.0" prefHeight="337.0" prefWidth="136.0">
          <columns>
-            <TableColumn id="tbl_category" prefWidth="120.66665649414062" text="Categories" />
+            <TableColumn fx:id="tbl_name" prefWidth="120.0" text="Categories" />
          </columns>
          <effect>
             <DropShadow>
                <color>
-                  <Color green="0.6333333253860474" blue="1.0" />
+                  <Color green="0.6333" blue="1.0" />
                </color>
             </DropShadow>
          </effect>
       </TableView>
-      <Button id="add_tran" layoutX="418.0" layoutY="48.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="+" />
-      <Button id="add_cat" layoutX="565.0" layoutY="49.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="+" />
-      <ImageView fitHeight="136.0" fitWidth="149.0" layoutX="-27.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true">
+	  <Button fx:id="add_tran" layoutX="418.0" layoutY="48.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="+" />
+      <Button fx:id="add_cat" layoutX="565.0" layoutY="49.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="+" />
+		<ImageView fitHeight="136.0" fitWidth="149.0" layoutX="-27.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../Downloads/1769011097555-removebg-preview.png" />
          </image>
          <effect>
             <DropShadow>
                <color>
-                  <Color green="0.4652046859264374" blue="0.6491228342056274" />
+                  <Color green="0.4652" blue="0.6491" />
                </color>
             </DropShadow>
          </effect>
@@ -65,37 +69,27 @@
             <Font name="System Bold" size="24.0" />
          </font>
          <effect>
-            <DropShadow height="28.79" radius="13.407499999999999" width="26.84">
+            <DropShadow height="28.79" radius="13.4" width="26.84">
                <color>
-                  <Color green="0.5666666626930237" blue="1.0" />
+                  <Color green="0.5666" blue="1.0" />
                </color>
             </DropShadow>
          </effect>
       </Text>
-      <Label id="lbl_catEdit" layoutX="456.0" layoutY="30.0" text="Edit" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
+      <Label fx:id="lbl_tranEdit" layoutX="164.0" layoutY="30.0" text="Edit" textFill="WHITE" underline="true" onMouseClicked="#onEditTransaction">
+         <font><Font name="System Bold" size="12.0" /></font>
       </Label>
-      <Label id="lbl_catDelete" layoutX="542.0" layoutY="29.0" text="Delete" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
+      <Label fx:id="lbl_tranDelete" layoutX="402.0" layoutY="29.0" text="Delete" textFill="WHITE" underline="true" onMouseClicked="#onDeleteTransaction">
+         <font><Font name="System Bold" size="12.0" /></font>
       </Label>
-      <Label id="lbl_tranEdit" layoutX="164.0" layoutY="30.0" text="Edit" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
+      <Label fx:id="lbl_catEdit" layoutX="456.0" layoutY="30.0" text="Edit" textFill="WHITE" underline="true" onMouseClicked="#onEditCategory">
+         <font><Font name="System Bold" size="12.0" /></font>
       </Label>
-      <Label id="lbl_tranDelete" layoutX="402.0" layoutY="29.0" text="Delete" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
+      <Label fx:id="lbl_catDelete" layoutX="542.0" layoutY="29.0" text="Delete" textFill="WHITE" underline="true" onMouseClicked="#onDeleteCategory">
+         <font><Font name="System Bold" size="12.0" /></font>
       </Label>
-      <Label id="lbl_account" layoutX="530.0" layoutY="6.0" onMouseClicked="#openAccountSettings" text="Account 👤" textFill="WHITE" underline="true">
-         <font>
-            <Font name="System Bold Italic" size="12.0" />
-         </font>
+      <Label fx:id="lbl_account" layoutX="530.0" layoutY="6.0" text="Account 👤" textFill="WHITE" underline="true" onMouseClicked="#openAccountSettings">
+         <font><Font name="System Bold Italic" size="12.0" /></font>
       </Label>
    </children>
 </Pane>
