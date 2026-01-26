@@ -20,6 +20,7 @@ public class NewCategoryController {
 
     private final ApiService api = new ApiService();
     private Long editingId = null;
+    ObjectMapper mapper = new ObjectMapper();
 
     @FXML
     public void initialize() {
@@ -40,11 +41,14 @@ public class NewCategoryController {
     public void onSave(){
         try{
             CategoryDTO dto = new CategoryDTO();
+            if (txtBudget.getText().isBlank()) {
+                show("Error","Budget is required");
+                return;
+            }
             dto.setName(txtName.getText());
             dto.setBudget(Double.parseDouble(txtBudget.getText()));
             dto.setDescription(txtDescription.getText());
 
-            ObjectMapper mapper = new ObjectMapper();
             String json = mapper.writeValueAsString(dto);
             String result;
 
@@ -67,4 +71,12 @@ public class NewCategoryController {
     public void onCancel(){
         txtName.getScene().getWindow().hide();
     }
+    
+    private void show(String title, String text) {
+     	 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+     	 alert.setTitle(title);
+     	 alert.setHeaderText(null);
+     	 alert.setContentText(text);
+     	 alert.showAndWait();	
+      }
 }
