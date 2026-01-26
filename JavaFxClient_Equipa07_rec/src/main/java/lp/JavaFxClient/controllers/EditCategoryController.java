@@ -2,57 +2,55 @@ package lp.JavaFxClient.controllers;
 
 import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.Cursor;
+import javafx.scene.control.PasswordField;
+import javafx.stage.Stage;
 import lp.JavaFxClient.model.CategoryDTO;
 import lp.JavaFxClient.services.ApiService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-//
-public class NewCategoryController {  
 
+
+public class EditCategoryController {
     @FXML private Label formTitle;
     @FXML private TextField txtName;
     @FXML private TextField txtBudget;
     @FXML private TextField txtDescription;
 
-    @FXML private Label lbl_cancel;
-
     private final ApiService api = new ApiService();
     private Long editingId = null;
 
-    @FXML
-    public void initialize() {
-        formTitle.setText("New Category");
-
-        lbl_cancel.setCursor(Cursor.HAND);
-        lbl_cancel.setOnMouseClicked(event -> onCancel());
-        
-    }
     public void loadCategory(CategoryDTO c){
         editingId = c.getId();
-        formTitle.setText("Edit Category");
-        txtName.setText(c.getName());
+        formTitle.setText("New Category");
+        txtName.setText(c.getNome());
         txtBudget.setText(String.valueOf(c.getBudget()));
-        txtDescription.setText(c.getDescription());
+        txtDescription.setText(c.getDescricao());
     }
+    
     @FXML
     public void onSave(){
         try{
             CategoryDTO dto = new CategoryDTO();
-            dto.setName(txtName.getText());
+            dto.setNome(txtName.getText());
             dto.setBudget(Double.parseDouble(txtBudget.getText()));
-            dto.setDescription(txtDescription.getText());
+            dto.setDescricao(txtDescription.getText());
 
-            ObjectMapper mapper = new ObjectMapper();
-            String json = mapper.writeValueAsString(dto);
             String result;
 
             if(editingId == null){
+                ObjectMapper mapper = new ObjectMapper();
+                String json = mapper.writeValueAsString(dto);
                 result = api.post("/category",json);
             }else{
                 dto.setId(editingId);
+                ObjectMapper mapper = new ObjectMapper();
+                String json = mapper.writeValueAsString(dto);
                 result = api.put("/category/" + editingId, json);
             }
 
