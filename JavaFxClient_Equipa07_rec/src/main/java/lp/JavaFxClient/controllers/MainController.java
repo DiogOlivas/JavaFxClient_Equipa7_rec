@@ -212,25 +212,6 @@ private void loadCategories(){
 			show("Warning", "Please select a category to delete.");
 		}
 	}
-	   @FXML
-    public void lblEditTransactionClicked() {
-        onEditTransaction();
-    }
-
-    @FXML
-    public void lblDeleteTransactionClicked() {
-        onDeleteTransaction();
-    }
-
-    @FXML
-    public void lblEditCategoryClicked() {
-        onEditCategory();
-    }
-
-    @FXML
-    public void lblDeleteCategoryClicked() {
-        onDeleteCategory();
-    }
 
     @FXML
     public void openAccountSettings() {

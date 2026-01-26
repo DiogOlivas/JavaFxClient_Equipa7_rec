@@ -6,18 +6,22 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.Cursor;
+import javafx.scene.control.Button;
+import javafx.scene.text.Text;
 import lp.JavaFxClient.model.CategoryDTO;
 import lp.JavaFxClient.services.ApiService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class NewCategoryController {  
 
-    @FXML private Label formTitle;
+    @FXML private Text formTitle;
     @FXML private TextField txtName;
     @FXML private TextField txtBudget;
     @FXML private TextField txtDescription;
 
     @FXML private Label lbl_cancel;
+
+    @FXML private Button btn_save;
 
     private final ApiService api = new ApiService();
     private Long editingId = null;
@@ -28,6 +32,8 @@ public class NewCategoryController {
 
         lbl_cancel.setCursor(Cursor.HAND);
         lbl_cancel.setOnMouseClicked(event -> onCancel());
+
+        btn_save.setOnAction(e -> onSave());
         
     }
     public void loadCategory(CategoryDTO c){
@@ -40,9 +46,23 @@ public class NewCategoryController {
     @FXML
     public void onSave(){
         try{
+            if (txtName.getText().isBlank() || txtBudget.getText().isBlank()) {
+            new Alert(AlertType.WARNING, "Name and Budget are required.").showAndWait();
+            return;
+        }
+
+        double budget;
+        try {
+            budget = Double.parseDouble(txtBudget.getText());
+        } catch (NumberFormatException ex) {
+            new Alert(AlertType.ERROR, "Budget has to be a valid number.").showAndWait();
+            return;
+        }
+
+
             CategoryDTO dto = new CategoryDTO();
             dto.setName(txtName.getText());
-            dto.setBudget(Double.parseDouble(txtBudget.getText()));
+            dto.setBudget(budget);
             dto.setDescription(txtDescription.getText());
 
             ObjectMapper mapper = new ObjectMapper();
@@ -68,4 +88,5 @@ public class NewCategoryController {
     public void onCancel(){
         txtName.getScene().getWindow().hide();
     }
+
 }
