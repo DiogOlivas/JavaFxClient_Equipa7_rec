@@ -2,6 +2,8 @@ package lp.JavaFxClient.controllers;
 
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javafx.fxml.FXML;
@@ -34,6 +36,12 @@ public class ProfileController {
 	@FXML
 	private Button bt_cancel;
 	
+	@FXML 
+	private Button bt_email;
+	
+	@FXML
+	private Button bt_budget;
+	
 	@FXML
 	private Label lbl_changePass;
 	
@@ -46,6 +54,9 @@ public class ProfileController {
 	@FXML
 	private TextField txt_budget;
 	
+	Long userId = UserSession.getInstance().getCurrentUserId();
+	String json = api.get("/users/" + userId);
+	
 	private void show(String title, String text) {
 		 Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		 alert.setTitle(title);
@@ -56,9 +67,7 @@ public class ProfileController {
 	
 	@FXML
 	public void initialize() {
-	    Long userId = UserSession.getInstance().getCurrentUserId();
 	    try {
-	        String json = api.get("/users/" + userId);
 	        if (!json.startsWith("ERROR:")) {
 	            UserDTO user = mapper.readValue(json, UserDTO.class);
 	            
@@ -71,6 +80,72 @@ public class ProfileController {
 	    } catch (Exception e) {
 	        show("Error: " , e.getMessage());
 	    }
+	    
+	    bt_budget.setOnMouseClicked(event -> editBudget());
+	    bt_email.setOnMouseClicked(event -> editEmail());
+	}
+	
+	@FXML
+	public void editEmail() {
+		UserDTO user;
+		try {
+			user = mapper.readValue(json, UserDTO.class);
+			if (user == null) {
+		        show("Error", "User not loaded.");
+		        return;
+		    }
+
+		    String newEmail;
+		    newEmail = txt_email.getText();
+
+		    if (newEmail.equals(user.getEmail())) {
+		        show("Attention!", "Email must be different to save.");
+		        return;
+		    }
+
+		    user.setEmail(newEmail);
+		    show("Success", "Email updated locally.");
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML
+	public void editBudget() {
+		UserDTO user;
+		try {
+			user = mapper.readValue(json, UserDTO.class);
+			if (user == null) {
+		        show("Error", "User not loaded.");
+		        return;
+		    }
+
+		    double newBudget;
+		    try {
+		        newBudget = Double.parseDouble(txt_budget.getText());
+		    } catch (NumberFormatException e) {
+		        show("Error", "Invalid budget value.");
+		        return;
+		    }
+
+		    if (Double.compare(newBudget,user.getBudget()) == 0) {
+		        show("Attention!", "Budget must be different to save.");
+		        return;
+		    }
+
+		    user.setBudget(newBudget);
+		    show("Success", "Budget updated locally.");
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 
