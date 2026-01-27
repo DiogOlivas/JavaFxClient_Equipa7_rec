@@ -3,15 +3,21 @@ package lp.JavaFxClient.controllers;
 
 
 
+import java.io.IOException;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import lp.JavaFxClient.model.UserDTO;
 import lp.JavaFxClient.services.ApiService;
 import lp.JavaFxClient_Equipa07_rec.UserSession;
@@ -218,6 +224,21 @@ public class ProfileController {
 		}
 	}
 	
+	@FXML
+    private void backToLogin(MouseEvent event) {
+           try {
+               FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
+               Parent root = loader.load();
+
+               Stage stage = (Stage) lbl_logout.getScene().getWindow();
+               stage.setScene(new Scene(root));
+
+               stage.show();
+           } catch (IOException e) {
+               e.printStackTrace();
+                   show("Error", "An unexpected error has occured, please try again.");
+           }
+    }
 	@FXML
     public void cancelChange() {
 		paneView(null);

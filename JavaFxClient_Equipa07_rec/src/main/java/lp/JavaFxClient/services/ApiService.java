@@ -46,40 +46,52 @@ public class ApiService {
          System.out.println("Body: " + response.body());
          return response.body();
          
-         //return client.send(request, HttpResponse.BodyHandlers.ofString()).body();
          }catch (Exception e) {
              return "ERROR: " + e.getMessage();
              }
          }
 
      public String put(String path, String json) {
-        try {
-        HttpRequest.BodyPublisher body =
-            (json == null || json.isEmpty())
-                ? HttpRequest.BodyPublishers.noBody()
-                : HttpRequest.BodyPublishers.ofString(json);
-        HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(BASE_URL + path))
-            .header("Content-Type", "application/json")
-            .PUT(body)
-            .build();
-        return client.send(request, HttpResponse.BodyHandlers.ofString()).body();
-        }catch (Exception e) {
-            return "ERROR: " + e.getMessage();
-            }
-        }
+    	    try {
+    	        HttpRequest.BodyPublisher body =
+    	            (json == null || json.isEmpty())
+    	                ? HttpRequest.BodyPublishers.noBody()
+    	                : HttpRequest.BodyPublishers.ofString(json);
 
-         public String delete(String path) {
-         try {
-             HttpRequest request = HttpRequest.newBuilder()
-                 .uri(URI.create(BASE_URL + path))
-                     .DELETE()
-                     .build();
-         String body = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
-         return body == null ? "" : body;
+    	        HttpRequest request = HttpRequest.newBuilder()
+    	            .uri(URI.create(BASE_URL + path))
+    	            .header("Content-Type", "application/json")
+    	            .PUT(body)
+    	            .build();
 
-         } catch (Exception e) {
-             return "ERROR: " + e.getMessage();
-             }
-         }
+    	        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+    	        if (response.statusCode() >= 200 && response.statusCode() < 300) {
+    	            return response.body() == null ? "" : response.body();
+    	        } else {
+    	            return "ERROR: HTTP " + response.statusCode() + " - " + response.body();
+    	        }
+
+    	    } catch (Exception e) {
+    	        return "ERROR: " + e.getMessage();
+    	    }
+    	}
+
+     public boolean delete(String path) {
+    	    try {
+    	        HttpRequest request = HttpRequest.newBuilder()
+    	            .uri(URI.create(BASE_URL + path))
+    	            .DELETE()
+    	            .build();
+
+    	        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+    	        return response.statusCode() >= 200 && response.statusCode() < 300;
+
+    	    } catch (Exception e) {
+    	        e.printStackTrace();
+    	        return false;
+    	    }
+    	}
+
 }
