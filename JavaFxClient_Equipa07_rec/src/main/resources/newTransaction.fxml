@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -10,10 +11,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lp.JavaFxClient.controllers.NewTransactionController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lp.JavaFxClient.controllers.NewTransactionController">
 
    <children>
-      <ImageView fitHeight="544.0" fitWidth="919.0" layoutX="-210.0" layoutY="-121.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="544.0" fitWidth="919.0" layoutX="-210.0" layoutY="-53.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/background.jpg" />
          </image>
@@ -32,19 +33,21 @@
 
       <Text fill="WHITE" layoutX="221.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment method:" />
 
-      <Button fx:id="btn_save" layoutX="273.0" layoutY="348.0" mnemonicParsing="false" onAction="#onSave" text="Save" />
+      <Button fx:id="btn_save" layoutX="273.0" layoutY="392.0" mnemonicParsing="false" onAction="#onSave" text="Save" />
 
-      <Label fx:id="lbl_cancel" layoutX="276.0" layoutY="377.0" onMouseClicked="#onCancel" text="Cancel" textFill="WHITE" underline="true" />
+      <Label fx:id="lbl_cancel" layoutX="276.0" layoutY="421.0" onMouseClicked="#onCancel" text="Cancel" textFill="WHITE" underline="true" />
 
       <ImageView fitHeight="112.0" fitWidth="106.0" layoutX="240.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/Logo_BugdetBuddy.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="220.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
+      <Text fill="WHITE" layoutX="220.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
 
       <TextField fx:id="txt_desc" layoutX="220.0" layoutY="204.0" />
       <Text fill="WHITE" layoutX="221.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" />
-      <DatePicker fx:id="dt_date" layoutX="218.0" layoutY="297.0" prefHeight="25.0" prefWidth="149.0" />
+      <DatePicker fx:id="dt_date" layoutX="218.0" layoutY="341.0" prefHeight="25.0" prefWidth="149.0" />
+      <ComboBox fx:id="cb_category" layoutX="218.0" layoutY="299.0" prefWidth="150.0" />
+      <Text fill="WHITE" layoutX="221.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category:" />
    </children>
 </Pane>

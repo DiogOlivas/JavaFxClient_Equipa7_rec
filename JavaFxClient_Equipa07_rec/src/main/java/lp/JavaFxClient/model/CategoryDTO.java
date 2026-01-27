@@ -22,14 +22,14 @@ public class CategoryDTO {
     }
 
 	public Long getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
-    public Long getUserid() {
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getUserId() {
 		return userId;
 	}
 
@@ -37,35 +37,35 @@ public class CategoryDTO {
 		this.userId = userId;
 	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getDescription() {
-        return desc;
-    }
+	public String getDesc() {
+		return desc;
+	}
 
-    public void setDescription(String description) {
-        this.desc = description;
-    }
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
 
-    public double getBudget() {
-        return budget;
-    }
+	public double getBudget() {
+		return budget;
+	}
 
-    public void setBudget(double budget) {
-        this.budget = budget;
-    }
+	public void setBudget(double budget) {
+		this.budget = budget;
+	}
 
-    public List<Long> getTransactions() {
-        return transactionIds;
-    }
+	public List<Long> getTransactionIds() {
+		return transactionIds;
+	}
 
-    public void setGastos(List<Long> transactionIds) {
-        this.transactionIds = transactionIds;
-    }
+	public void setTransactionIds(List<Long> transactionIds) {
+		this.transactionIds = transactionIds;
+	}
 }
