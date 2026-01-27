@@ -15,7 +15,6 @@ public class UserDTO {
 
 		public UserDTO(Long id, String username, String email, double budget, String password, List<Long> categoryIds,
 				List<Long> transactionIds) {
-			super();
 			this.id = id;
 			this.username = username;
 			this.email = email;

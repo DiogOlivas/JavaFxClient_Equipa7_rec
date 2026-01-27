@@ -43,7 +43,7 @@ public class LoginController {
     
     @FXML
     private void initialize() {
-    	txt_user.clear();
+    		txt_user.clear();
         txt_pass.clear();
     
         //lbl_sign.setOnMouseClicked(event -> openSignUp(MouseEvent));
@@ -65,12 +65,12 @@ public class LoginController {
         	try {
 
 	        	ObjectMapper mapper = new ObjectMapper();
-    	    	JsonNode node = mapper.readTree(response);
+    	    		JsonNode node = mapper.readTree(response);
 	            
-    	    	long id = node.get("id").asLong();
+    	    		long id = node.get("id").asLong();
         		String user = node.get("username").asText();
         	
-       	 		UserSession.getInstance().setCurrentUser(user);
+       	 	UserSession.getInstance().setCurrentUser(user);
             	UserSession.getInstance().setCurrentUserId(id);	
             	
             	show("Login successful!", "Welcome to BudgetBuddy! 😊");
