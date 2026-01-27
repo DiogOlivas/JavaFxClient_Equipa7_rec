@@ -123,9 +123,6 @@ public class MainController {
 	    e.printStackTrace();
 	    show("Error", "Failed to load data:\n" + e.getMessage());
 	}
-		///show("Error", "Failed to load transactions: " + e.getMessage());
-		///SE O UTILIZADOR NÃO TIVER NENHUMA TRANSAÇÃO, ISTO VAI APARECER, E NÃO PODE SER ASSIM
-
  }
  
 private void loadCategories(){
