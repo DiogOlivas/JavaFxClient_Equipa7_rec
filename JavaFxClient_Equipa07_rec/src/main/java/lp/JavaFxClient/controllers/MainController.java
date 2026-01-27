@@ -74,7 +74,7 @@ public class MainController {
  }
  private void loadTransactions(){
 	try{
-		String json = api.get("/transaction");
+		String json = api.get("/transactions");
 		if(json.startsWith("ERROR")){
 			show("Error", json);
 			return;
@@ -82,15 +82,17 @@ public class MainController {
 		TransactionDTO[] transactions = mapper.readValue(json, TransactionDTO[].class); // Desserializa o JSON em um array de TransactionDTO
 		tbl_transactions.getItems().setAll(transactions); // Atualiza a tabela com as transações
 	} catch (Exception e){
+	    e.printStackTrace();
+	    show("Error", "Failed to load data:\n" + e.getMessage());
+	}
 		///show("Error", "Failed to load transactions: " + e.getMessage());
 		///SE O UTILIZADOR NÃO TIVER NENHUMA TRANSAÇÃO, ISTO VAI APARECER, E NÃO PODE SER ASSIM
 
-	}
  }
  
 private void loadCategories(){
 	try{
-		String json = api.get("/category");
+		String json = api.get("/categories");
 		if(json.startsWith("ERROR")){
 			show("Error", json);
 			return;
@@ -98,10 +100,12 @@ private void loadCategories(){
 		CategoryDTO[] category = mapper.readValue(json, CategoryDTO[].class); // Desserializa o JSON em um array de CategoryDTO
 		tbl_category.getItems().setAll(category); // Atualiza a tabela com as categorias
 	} catch (Exception e){
-		
+	    e.printStackTrace();
+	    show("Error", "Failed to load data:\n" + e.getMessage());
+	}
 		///show("Error", "Failed to load categories: " + e.getMessage());
 		///SE O UTILIZADOR NÃO TIVER NENHUMA CATEGORIA, ISTO VAI APARECER, E NÃO PODE SER ASSIM
-	}
+	
 }
 
  @FXML 

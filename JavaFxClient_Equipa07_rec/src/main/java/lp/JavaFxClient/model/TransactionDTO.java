@@ -1,6 +1,5 @@
 package lp.JavaFxClient.model;
 
-import java.util.List;
 import java.time.LocalDate;
 
 public class TransactionDTO {
@@ -10,19 +9,19 @@ public class TransactionDTO {
     private String description;
     private Long userId; 
     private String paymentMethod; 
-    private List<Long> categoryIds; //list of category IDs 
+    private Long categoryId; 
     
 
     public TransactionDTO() {}
 
-    public TransactionDTO(Long id, double value, LocalDate date, String description, Long userId, String paymentMethod, List<Long> categoryIds) {
+    public TransactionDTO(Long id, double value, LocalDate date, String description, Long userId, String paymentMethod, Long categoryId) {
         this.id = id;
         this.value = value;
         this.description = description;
         this.userId = userId;
         this.date = date;
         this.paymentMethod = paymentMethod;
-        this.categoryIds = categoryIds;
+        this.categoryId = categoryId;
     }
     
     //Getters and Setters
@@ -62,11 +61,11 @@ public class TransactionDTO {
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
-    public List<Long> getCategoryIds() {
-        return categoryIds;
+    public Long getCategoryId() {
+        return categoryId;
     }
-    public void setCategoryIds(List<Long> categoryIds) {
-        this.categoryIds = categoryIds;
+    public void setCategoryIds(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
 }
