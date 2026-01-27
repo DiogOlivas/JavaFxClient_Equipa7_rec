@@ -18,12 +18,11 @@
          </image>
       </ImageView>
       <Text fill="WHITE" layoutX="83.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
-      <TextField fx:id="txt_name" layoutX="83.0" layoutY="120.0" />
+      <TextField fx:id="txt_name" editable="false" layoutX="83.0" layoutY="120.0" />
       <Text fill="WHITE" layoutX="83.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
       <TextField fx:id="txt_email" layoutX="83.0" layoutY="182.0" />
       <Text fill="WHITE" layoutX="83.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Budget" />
       <TextField fx:id="txt_budget" layoutX="83.0" layoutY="242.0" />
-      <Button fx:id="bt_name" layoutX="235.0" layoutY="120.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="28.0" text="✎" />
       <Button fx:id="bt_email" layoutX="235.0" layoutY="181.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="28.0" text="✎" />
       <Button fx:id="bt_budget" layoutX="235.0" layoutY="241.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="28.0" text="✎" />
       <Text fill="WHITE" layoutX="98.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Forgot yourt password?" />
@@ -37,7 +36,7 @@
             <Image url="@images/Logo_BugdetBuddy.png" />
          </image>
       </ImageView>
-      <Pane fx:id="pane_pass" layoutY="-1.0" prefHeight="370.0" prefWidth="326.0" visible="false" >
+      <Pane fx:id="pane_pass" layoutY="-1.0" prefHeight="370.0" prefWidth="326.0" visible="false">
          <children>
             <ImageView fitHeight="385.0" fitWidth="672.0" layoutX="-253.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -61,5 +60,15 @@
             <TextField fx:id="txt_oldPass" layoutX="89.0" layoutY="160.0" />
          </children>
       </Pane>
+      <Label fx:id="lbl_logout" layoutX="7.0" layoutY="353.0" prefHeight="15.0" prefWidth="34.0" text="LogOut" textFill="WHITE" underline="true" onMouseClicked="#backToLogin" >
+         <font>
+            <Font name="System Italic" size="10.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_back" layoutX="3.0" layoutY="6.0" prefHeight="15.0" prefWidth="34.0" text="Back" textFill="WHITE" underline="true" onMouseClicked="#backToMenu" >
+         <font>
+            <Font name="System Italic" size="10.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

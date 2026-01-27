@@ -4,8 +4,6 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.net.CookieManager;
-import java.net.CookiePolicy;
 
 public class ApiService {
      private static final String BASE_URL = "http://localhost:8080";

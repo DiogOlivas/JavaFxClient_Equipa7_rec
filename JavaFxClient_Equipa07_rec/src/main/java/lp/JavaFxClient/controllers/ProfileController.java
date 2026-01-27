@@ -59,6 +59,12 @@ public class ProfileController {
 	@FXML
 	private TextField txt_budget;
 	
+	@FXML
+	private Label lbl_logout;
+	
+	@FXML
+	private Label lbl_back;
+	
 	private UserDTO currentUser;
 	
 	private void show(String title, String text) {
@@ -115,11 +121,14 @@ public class ProfileController {
 	    }
 
 	    try {
-	        String body = """
-	            { "newEmail": "%s" }
-	            """.formatted(newEmail);
+	        String json = """
+	            {
+	                "newEmail": "%s",
+	                "userId": %d
+	            }
+	            """.formatted(newEmail, UserSession.getInstance().getCurrentUserId());
 
-	        String response = api.post("/users/change-email", body);
+	        String response = api.post("/users/change-email", json);
 
 	        if (response.startsWith("ERROR")) {
 	            show("Error", response);
@@ -135,7 +144,7 @@ public class ProfileController {
 	    }
 	}
 
-	
+
 	@FXML
 	public void editBudget() {
 	    if (currentUser == null) {
@@ -145,23 +154,31 @@ public class ProfileController {
 
 	    double newBudget;
 	    try {
-	        newBudget = Double.parseDouble(txt_budget.getText());
+	        newBudget = Double.parseDouble(txt_budget.getText().trim());
+	        
+	        if (Double.compare(newBudget, currentUser.getBudget()) == 0) {
+		        show("Attention!", "Budget must be different to save.");
+		        return;
+		    }
+		    
+		    if(newBudget < 0) {
+	            show("Attention!", "Budget must be a positive value.");
+	        return;
+		    }
 	    } catch (NumberFormatException e) {
 	        show("Error", "Invalid budget value.");
 	        return;
 	    }
 
-	    if (Double.compare(newBudget, currentUser.getBudget()) == 0) {
-	        show("Attention!", "Budget must be different to save.");
-	        return;
-	    }
-
 	    try {
-	        String body = """
-	            { "newBudget": %.2f }
-	            """.formatted(newBudget);
+	        String json = """
+	            {
+	                "newBudget": %.2f,
+	                "userId": %d
+	            }
+	            """.formatted(newBudget, UserSession.getInstance().getCurrentUserId());
 
-	        String response = api.post("/users/change-budget", body);
+	        String response = api.post("/users/change-budget", json);
 
 	        if (response.startsWith("ERROR")) {
 	            show("Error", response);
@@ -177,15 +194,18 @@ public class ProfileController {
 	    }
 	}
 
-
 	@FXML
 	public void changePassword() {
-	    Long user = UserSession.getInstance().getCurrentUserId();
-	    String oldPass = txt_oldPass.getText();
-	    String newPass = txt_newPass.getText();
+	    if (currentUser == null) {
+	        show("Error", "User not loaded.");
+	        return;
+	    }
+
+	    String oldPass = txt_oldPass.getText().trim();
+	    String newPass = txt_newPass.getText().trim();
 
 	    if (oldPass.isBlank() || newPass.isBlank()) {
-	        show("Attention!", "All Fields Are Required!");
+	        show("Attention!", "All fields are required.");
 	        return;
 	    }
 
@@ -197,23 +217,31 @@ public class ProfileController {
 	    try {
 	        String json = """
 	            {
-	        		  "userId": "%d",	
-	              "oldPassword": "%s",
-	              "newPassword": "%s"
+	                "userId": %d,
+	                "oldPassword": "%s",
+	                "newPassword": "%s"
 	            }
-	            """.formatted(user, oldPass, newPass);
+	            """.formatted(UserSession.getInstance().getCurrentUserId(), oldPass, newPass);
 
-	        api.post("/users/change-password", json);
+	        String response = api.post("/users/change-password", json);
+
+	        if (response.startsWith("ERROR")) {
+	            show("Error", response);
+	            return;
+	        }
 
 	        txt_oldPass.clear();
 	        txt_newPass.clear();
 	        paneView(null);
-	        
+
+	        show("Success", "Password updated successfully.");
+
 	    } catch (Exception e) {
-	        show("Warning!", "Error while trying to change password, please try again.");
 	        e.printStackTrace();
+	        show("Error", "Failed to change password.");
 	    }
 	}
+
 
 	@FXML
 	public void paneView(MouseEvent event) {
@@ -239,6 +267,23 @@ public class ProfileController {
                    show("Error", "An unexpected error has occured, please try again.");
            }
     }
+	
+	@FXML
+    private void backToMenu(MouseEvent event) {
+           try {
+               FXMLLoader loader = new FXMLLoader(getClass().getResource("/main.fxml"));
+               Parent root = loader.load();
+
+               Stage stage = (Stage) lbl_back.getScene().getWindow();
+               stage.setScene(new Scene(root));
+
+               stage.show();
+           } catch (IOException e) {
+               e.printStackTrace();
+                   show("Error", "An unexpected error has occured, please try again.");
+           }
+    }
+	
 	@FXML
     public void cancelChange() {
 		paneView(null);
