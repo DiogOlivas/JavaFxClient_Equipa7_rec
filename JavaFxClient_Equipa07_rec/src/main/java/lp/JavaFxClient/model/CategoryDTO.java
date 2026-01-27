@@ -29,11 +29,11 @@ public class CategoryDTO {
         this.id = id;
     }
     
-    public Long getUser() {
+    public Long getUserid() {
 		return userId;
 	}
 
-	public void setUser(Long userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 

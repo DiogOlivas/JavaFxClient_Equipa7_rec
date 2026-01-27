@@ -50,8 +50,8 @@
             </DropShadow>
          </effect>
       </TableView>
-	  <Button fx:id="add_tran" layoutX="418.0" layoutY="48.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="+" />
-      <Button fx:id="add_cat" layoutX="565.0" layoutY="49.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="+" />
+	  <Button fx:id="add_tran" layoutX="418.0" layoutY="48.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="+" onAction="#onAddTransaction"/>
+      <Button fx:id="add_cat" layoutX="565.0" layoutY="49.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="+" onAction="#onAddCategory"/>
 		<ImageView fitHeight="136.0" fitWidth="149.0" layoutX="-27.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../Downloads/1769011097555-removebg-preview.png" />

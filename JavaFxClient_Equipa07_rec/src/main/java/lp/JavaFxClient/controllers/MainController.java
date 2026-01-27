@@ -3,8 +3,13 @@ package lp.JavaFxClient.controllers;
 import javafx.fxml.FXML;
 import lp.JavaFxClient.model.TransactionDTO;
 import lp.JavaFxClient.services.ApiService;
+import lp.JavaFxClient_Equipa07_rec.UserSession;
+
+import java.net.URL;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -52,15 +57,20 @@ public class MainController {
 
  @FXML
  public void initialize(){
-	 tbl_value.setCellValueFactory(new PropertyValueFactory<>("value"));
-	 tbl_desc.setCellValueFactory(new PropertyValueFactory<>("description"));
-	 tbl_pay.setCellValueFactory(new PropertyValueFactory<>("paymentMethod"));
-	 tbl_date.setCellValueFactory(new PropertyValueFactory<>("date"));
+	 try {
+		 lbl_account.setText(UserSession.getInstance().getCurrentUser() + "👤");
 
-	 tbl_name.setCellValueFactory(new PropertyValueFactory<>("name"));
-	 loadTransactions();
-	 loadCategories();
-
+		 tbl_value.setCellValueFactory(new PropertyValueFactory<>("value"));
+		 tbl_desc.setCellValueFactory(new PropertyValueFactory<>("description"));
+		 tbl_pay.setCellValueFactory(new PropertyValueFactory<>("paymentMethod"));
+		 tbl_date.setCellValueFactory(new PropertyValueFactory<>("date"));
+		 tbl_name.setCellValueFactory(new PropertyValueFactory<>("name"));
+		 		 
+		 loadTransactions();
+		 loadCategories();
+	 }catch(Exception e) {
+		 show("Error.", "An unexpected error has occured.");
+	 }
  }
  private void loadTransactions(){
 	try{
@@ -72,7 +82,9 @@ public class MainController {
 		TransactionDTO[] transactions = mapper.readValue(json, TransactionDTO[].class); // Desserializa o JSON em um array de TransactionDTO
 		tbl_transactions.getItems().setAll(transactions); // Atualiza a tabela com as transações
 	} catch (Exception e){
-		show("Error", "Failed to load transactions: " + e.getMessage());
+		///show("Error", "Failed to load transactions: " + e.getMessage());
+		///SE O UTILIZADOR NÃO TIVER NENHUMA TRANSAÇÃO, ISTO VAI APARECER, E NÃO PODE SER ASSIM
+
 	}
  }
  
@@ -86,7 +98,9 @@ private void loadCategories(){
 		CategoryDTO[] category = mapper.readValue(json, CategoryDTO[].class); // Desserializa o JSON em um array de CategoryDTO
 		tbl_category.getItems().setAll(category); // Atualiza a tabela com as categorias
 	} catch (Exception e){
-		show("Error", "Failed to load categories: " + e.getMessage());
+		
+		///show("Error", "Failed to load categories: " + e.getMessage());
+		///SE O UTILIZADOR NÃO TIVER NENHUMA CATEGORIA, ISTO VAI APARECER, E NÃO PODE SER ASSIM
 	}
 }
 
@@ -97,7 +111,10 @@ private void loadCategories(){
  
  private void openTransactionForm(TransactionDTO transaction){
 	try{
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/lp/JavaFxClient/views/NewTransaction.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/newTransaction.fxml"));
+		URL fxmlPath = getClass().getResource("/newTransaction.fxml");
+		System.out.println(fxmlPath);
+		
 		Parent root = loader.load();
 
 		NewTransactionController controller = loader.getController(); 
@@ -117,7 +134,7 @@ private void loadCategories(){
 	}
   }
    @FXML
-    public void onEditTransaction() {
+    public void onEditTransaction(MouseEvent event) {
         TransactionDTO selectedTransaction = tbl_transactions.getSelectionModel().getSelectedItem();
 		if (selectedTransaction != null) {
 			openTransactionForm(selectedTransaction);
@@ -126,7 +143,7 @@ private void loadCategories(){
 		}
 	}
 	@FXML
-	public void onDeleteTransaction() {
+	public void onDeleteTransaction(MouseEvent event) {
 		TransactionDTO selectedTransaction = tbl_transactions.getSelectionModel().getSelectedItem();
 		if (selectedTransaction != null) {
 			try {
@@ -147,7 +164,7 @@ private void loadCategories(){
 
 	private void openCategoryForm(CategoryDTO c) {
     try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/lp/JavaFxClient/views/NewCategory.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/newCategory.fxml"));
         Parent root = loader.load();
 
         // Passa os dados para o controller do formulário
@@ -171,9 +188,13 @@ private void loadCategories(){
 }
 
 	@FXML
+	public void onAddCategory() {
+		openCategoryForm(null);
+	}
+	/**@FXML
 	public void onAddCategory(){
 		try{
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/lp/JavaFxClient/views/NewCategory.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("NewCategory.fxml"));
 			Parent root = loader.load();
 
 			Stage stage = new Stage();
@@ -183,9 +204,10 @@ private void loadCategories(){
 		} catch (Exception e){
 			show("Error", "Failed to open category form: " + e.getMessage());
 		}
-	}
+	}**/
+	
 	@FXML
-	public void onEditCategory() {
+	public void onEditCategory(MouseEvent event) {
         CategoryDTO selectedCategory = tbl_category.getSelectionModel().getSelectedItem();
 		if (selectedCategory != null) {
 			openCategoryForm(selectedCategory);
@@ -194,7 +216,7 @@ private void loadCategories(){
 		}
 	}
 	@FXML
-	public void onDeleteCategory() {
+	public void onDeleteCategory(MouseEvent event) {
 		CategoryDTO selectedCategory = tbl_category.getSelectionModel().getSelectedItem();
 		if (selectedCategory != null) {
 			try {
@@ -214,7 +236,22 @@ private void loadCategories(){
 	}
 
     @FXML
-    public void openAccountSettings() {
-        show("Account", "Account settings clicked!");
+    public void openAccountSettings(MouseEvent event) {
+    	try {   		 
+            FXMLLoader loader = new
+    	    FXMLLoader(getClass().getResource("/profile.fxml"));
+    		Parent root = loader.load();
+    		
+    		Stage stage = new Stage();
+    		stage.setTitle("Profile");
+    		stage.setScene(new Scene(root));
+    		stage.show();
+
+    		Stage loginWindow = (Stage) lbl_account.getScene().getWindow();
+    		loginWindow.close(); 
+    	} catch (Exception e) {
+    		 e.printStackTrace();
+    		 show("Error", "An unexpected error has occured, please try again.");
+    	}	
     }
 }
