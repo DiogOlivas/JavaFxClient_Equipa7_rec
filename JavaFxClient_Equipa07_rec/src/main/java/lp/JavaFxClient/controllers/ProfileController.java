@@ -76,7 +76,7 @@ public class ProfileController {
 
 	@FXML
 	public void changePassword() {
-	    String username = UserSession.getInstance().getCurrentUser();
+	    Long user = UserSession.getInstance().getCurrentUserId();
 	    String oldPass = txt_oldPass.getText();
 	    String newPass = txt_newPass.getText();
 
@@ -93,10 +93,11 @@ public class ProfileController {
 	    try {
 	        String json = """
 	            {
+	        		  "userId": "%d",	
 	              "oldPassword": "%s",
 	              "newPassword": "%s"
 	            }
-	            """.formatted(oldPass, newPass);
+	            """.formatted(user, oldPass, newPass);
 
 	        api.post("/users/change-password", json);
 
