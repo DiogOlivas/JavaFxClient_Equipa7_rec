@@ -1,13 +1,19 @@
 package lp.JavaFxClient.controllers;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import lp.JavaFxClient.model.TransactionDTO;
 import lp.JavaFxClient.services.ApiService;
 import lp.JavaFxClient_Equipa07_rec.UserSession;
 
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXMLLoader;
@@ -51,13 +57,17 @@ public class MainController {
     @FXML private Label lbl_catDelete;
     @FXML private Label lbl_account;
 
-
-
  private final ObjectMapper mapper = new ObjectMapper();
+
+ 
 
  @FXML
  public void initialize(){
 	 try {
+		 mapper.registerModule(new JavaTimeModule());
+		 mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+		 mapper.configure(com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
 		 lbl_account.setText(UserSession.getInstance().getCurrentUser() + "👤");
 
 		 tbl_value.setCellValueFactory(new PropertyValueFactory<>("value"));
@@ -65,13 +75,41 @@ public class MainController {
 		 tbl_pay.setCellValueFactory(new PropertyValueFactory<>("paymentMethod"));
 		 tbl_date.setCellValueFactory(new PropertyValueFactory<>("date"));
 		 tbl_name.setCellValueFactory(new PropertyValueFactory<>("name"));
-		 		 
+		 
+		 tbl_category.getSelectionModel().selectedItemProperty().addListener(
+			        (obs, oldSelection, newSelection) -> {
+			            if (newSelection != null) {
+			                filterTransactionsByCategory(newSelection.getId());
+			            } else {
+			                loadTransactions();
+			            }
+			        }
+				 );
+		 
 		 loadTransactions();
 		 loadCategories();
 	 }catch(Exception e) {
 		 show("Error.", "An unexpected error has occured.");
 	 }
  }
+ 
+ private void filterTransactionsByCategory(Long categoryId) {
+	    try {
+	        String json = api.get("/transactions");
+	        TransactionDTO[] transactions = mapper.readValue(json, TransactionDTO[].class);
+
+	        List<TransactionDTO> filtered = Arrays.stream(transactions)
+	            .filter(tx -> tx.getCategoryId() != null && tx.getCategoryId().equals(categoryId))
+	            .toList();
+
+	        tbl_transactions.getItems().setAll(filtered);
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        show("Error", "Failed to filter transactions:\n" + e.getMessage());
+	    }
+ } 
+ 
  private void loadTransactions(){
 	try{
 		String json = api.get("/transactions");

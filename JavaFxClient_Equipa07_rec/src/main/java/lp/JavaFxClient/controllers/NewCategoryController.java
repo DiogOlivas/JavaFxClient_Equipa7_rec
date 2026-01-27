@@ -8,6 +8,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.text.Text;
 import lp.JavaFxClient.model.CategoryDTO;
 import lp.JavaFxClient.services.ApiService;
@@ -25,6 +26,7 @@ public class NewCategoryController {
 
     @FXML private Button btn_save;
 
+
     private final ApiService api = new ApiService();
     private Long editingId = null;
 
@@ -41,7 +43,7 @@ public class NewCategoryController {
         editingId = c.getId();
         txt_name.setText(c.getName());
         txt_budget.setText(String.valueOf(c.getBudget()));
-        txt_description.setText(c.getDescription());
+        txt_description.setText(c.getDesc());
     }
     @FXML
     public void onSave(){
@@ -62,8 +64,9 @@ public class NewCategoryController {
             CategoryDTO dto = new CategoryDTO();
             dto.setName(txt_name.getText());
             dto.setUserId(UserSession.getInstance().getCurrentUserId());
+            dto.setDesc(txt_description.getText());
             dto.setBudget(budget);
-            dto.setDescription(txt_description.getText());
+
 
             ObjectMapper mapper = new ObjectMapper();
             String json = mapper.writeValueAsString(dto);
@@ -76,7 +79,7 @@ public class NewCategoryController {
                 result = api.put("/categories/" + editingId, json);
             }
 
-            new Alert(Alert.AlertType.INFORMATION, result).showAndWait();
+            //new Alert(Alert.AlertType.INFORMATION, result).showAndWait();
             txt_name.getScene().getWindow().hide();
 
         } catch (Exception e ){
