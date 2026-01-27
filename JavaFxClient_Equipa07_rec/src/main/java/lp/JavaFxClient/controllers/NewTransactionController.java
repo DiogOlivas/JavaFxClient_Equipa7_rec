@@ -84,6 +84,11 @@ public class NewTransactionController {
                 show("Warning", "Please select a category.");
                 return;
             }
+    	    
+    	    if(Double.parseDouble(txt_value.getText()) < 0) {
+                show("Attention!", "Budget must be a positive value.");
+            return;
+    	    }
 
             TransactionDTO dto = new TransactionDTO();
             dto.setValue(Double.parseDouble(txt_value.getText()));
@@ -112,10 +117,10 @@ public class NewTransactionController {
                 show("Error", "Failed to save transaction:\n" + result);
                 return;
             }
-
+            
             show("Success", editingId == null ? "Transaction added!" : "Transaction updated!");
             txt_value.getScene().getWindow().hide();
-
+            
         } catch (NumberFormatException nfe) {
             show("Error", "Value must be a number.");
         } catch (Exception e) {
@@ -134,7 +139,6 @@ public class NewTransactionController {
 	        ObservableList<CategoryDTO> categoryList = FXCollections.observableArrayList(categories);
 	        cb_category.setItems(categoryList);
 
-	        // Show the name in the ComboBox
 	        cb_category.setCellFactory(c -> new ListCell<>() {
 	            @Override
 	            protected void updateItem(CategoryDTO item, boolean empty) {
