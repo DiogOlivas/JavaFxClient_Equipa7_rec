@@ -1,17 +1,6 @@
 package lp.JavaFxClient.controllers;
 
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.nio.charset.StandardCharsets;
-import java.util.concurrent.CompletableFuture;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -20,7 +9,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import lp.JavaFxClient.model.UserDTO;
@@ -68,7 +56,7 @@ public class ProfileController {
 	
 	@FXML
 	public void initialize() {
-	    String userId = UserSession.getInstance().getCurrentUser();
+	    Long userId = UserSession.getInstance().getCurrentUserId();
 	    try {
 	        String json = api.get("/users/" + userId);
 	        if (!json.startsWith("ERROR:")) {
@@ -88,7 +76,6 @@ public class ProfileController {
 
 	@FXML
 	public void changePassword() {
-
 	    String username = UserSession.getInstance().getCurrentUser();
 	    String oldPass = txt_oldPass.getText();
 	    String newPass = txt_newPass.getText();
