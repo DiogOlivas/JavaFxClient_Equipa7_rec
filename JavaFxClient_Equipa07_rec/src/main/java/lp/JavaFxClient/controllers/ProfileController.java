@@ -2,8 +2,7 @@ package lp.JavaFxClient.controllers;
 
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javafx.fxml.FXML;
@@ -54,8 +53,7 @@ public class ProfileController {
 	@FXML
 	private TextField txt_budget;
 	
-	Long userId = UserSession.getInstance().getCurrentUserId();
-	String json = api.get("/users/" + userId);
+	private UserDTO currentUser;
 	
 	private void show(String title, String text) {
 		 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -68,84 +66,109 @@ public class ProfileController {
 	@FXML
 	public void initialize() {
 	    try {
-	        if (!json.startsWith("ERROR:")) {
-	            UserDTO user = mapper.readValue(json, UserDTO.class);
-	            
-	            txt_name.setText(user.getUsername());
-	            txt_email.setText(user.getEmail());
-	            txt_budget.setText(String.valueOf(user.getBudget()));
-	        } else {
-	            show("Error while loadin profile: " ,json);
+	        Long userId = UserSession.getInstance().getCurrentUserId();
+	        String json = api.get("/users/" + userId);
+
+	        if (json.startsWith("ERROR")) {
+	            show("Error while loading profile", json);
+	            return;
 	        }
+
+	        currentUser = mapper.readValue(json, UserDTO.class);
+
+	        txt_name.setText(currentUser.getUsername());
+	        txt_email.setText(currentUser.getEmail());
+	        txt_budget.setText(String.valueOf(currentUser.getBudget()));
+
 	    } catch (Exception e) {
-	        show("Error: " , e.getMessage());
+	        e.printStackTrace();
+	        show("Error", e.getMessage());
 	    }
-	    
-	    bt_budget.setOnMouseClicked(event -> editBudget());
-	    bt_email.setOnMouseClicked(event -> editEmail());
+
+	    bt_budget.setOnMouseClicked(e -> editBudget());
+	    bt_email.setOnMouseClicked(e -> editEmail());
 	}
 	
 	@FXML
 	public void editEmail() {
-		UserDTO user;
-		try {
-			user = mapper.readValue(json, UserDTO.class);
-			if (user == null) {
-		        show("Error", "User not loaded.");
-		        return;
-		    }
+	    if (currentUser == null) {
+	        show("Error", "User not loaded.");
+	        return;
+	    }
 
-		    String newEmail;
-		    newEmail = txt_email.getText();
+	    String newEmail = txt_email.getText().trim();
 
-		    if (newEmail.equals(user.getEmail())) {
-		        show("Attention!", "Email must be different to save.");
-		        return;
-		    }
+	    if (newEmail.isBlank()) {
+	        show("Attention!", "Email cannot be empty.");
+	        return;
+	    }
 
-		    user.setEmail(newEmail);
-		    show("Success", "Email updated locally.");
-		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	    if (newEmail.equals(currentUser.getEmail())) {
+	        show("Attention!", "Email must be different to save.");
+	        return;
+	    }
+
+	    try {
+	        String body = """
+	            { "newEmail": "%s" }
+	            """.formatted(newEmail);
+
+	        String response = api.post("/users/change-email", body);
+
+	        if (response.startsWith("ERROR")) {
+	            show("Error", response);
+	            return;
+	        }
+
+	        currentUser.setEmail(newEmail);
+	        show("Success", "Email updated successfully.");
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        show("Error", "Failed to update email.");
+	    }
 	}
+
 	
 	@FXML
 	public void editBudget() {
-		UserDTO user;
-		try {
-			user = mapper.readValue(json, UserDTO.class);
-			if (user == null) {
-		        show("Error", "User not loaded.");
-		        return;
-		    }
+	    if (currentUser == null) {
+	        show("Error", "User not loaded.");
+	        return;
+	    }
 
-		    double newBudget;
-		    try {
-		        newBudget = Double.parseDouble(txt_budget.getText());
-		    } catch (NumberFormatException e) {
-		        show("Error", "Invalid budget value.");
-		        return;
-		    }
+	    double newBudget;
+	    try {
+	        newBudget = Double.parseDouble(txt_budget.getText());
+	    } catch (NumberFormatException e) {
+	        show("Error", "Invalid budget value.");
+	        return;
+	    }
 
-		    if (Double.compare(newBudget,user.getBudget()) == 0) {
-		        show("Attention!", "Budget must be different to save.");
-		        return;
-		    }
+	    if (Double.compare(newBudget, currentUser.getBudget()) == 0) {
+	        show("Attention!", "Budget must be different to save.");
+	        return;
+	    }
 
-		    user.setBudget(newBudget);
-		    show("Success", "Budget updated locally.");
-		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	    try {
+	        String body = """
+	            { "newBudget": %.2f }
+	            """.formatted(newBudget);
+
+	        String response = api.post("/users/change-budget", body);
+
+	        if (response.startsWith("ERROR")) {
+	            show("Error", response);
+	            return;
+	        }
+
+	        currentUser.setBudget(newBudget);
+	        show("Success", "Budget updated successfully.");
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        show("Error", "Failed to update budget.");
+	    }
 	}
 
 
