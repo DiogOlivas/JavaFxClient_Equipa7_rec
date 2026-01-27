@@ -16,23 +16,23 @@
             <Image url="@images/background.jpg" />
          </image>
       </ImageView>
-      <TextField id="txt_name" layoutX="222.0" layoutY="167.0" />
+      <TextField fx:id="txt_name" layoutX="222.0" layoutY="167.0" />
       <Text fill="WHITE" layoutX="209.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit category">
          <font>
             <Font name="System Bold" size="28.0" />
          </font>
       </Text>
       <Text fill="WHITE" layoutX="225.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
-      <TextField id="txt_budget" layoutX="223.0" layoutY="223.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="txt_budget" layoutX="223.0" layoutY="223.0" prefHeight="25.0" prefWidth="149.0" />
       <Text fill="WHITE" layoutX="222.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Budget:" />
-      <Button id="btn_save" layoutX="276.0" layoutY="321.0" mnemonicParsing="false" text="Save" />
-      <Label id="lbl_cancel" layoutX="279.0" layoutY="353.0" text="Cancel" textFill="WHITE" underline="true" />
+      <Button fx:id="btn_save" layoutX="276.0" layoutY="321.0" mnemonicParsing="false" text="Save" />
+      <Label fx:id="lbl_cancel" layoutX="279.0" layoutY="353.0" text="Cancel" textFill="WHITE" underline="true" />
       <ImageView fitHeight="102.0" fitWidth="103.0" layoutX="245.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/Logo_BugdetBuddy.png" />
          </image>
       </ImageView>
-      <TextField id="txt_budget" layoutX="222.0" layoutY="278.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="txt_description" layoutX="222.0" layoutY="278.0" prefHeight="25.0" prefWidth="149.0" />
       <Text fill="WHITE" layoutX="222.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description (Optional):" />
    </children>
 </Pane>

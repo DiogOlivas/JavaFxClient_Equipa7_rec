@@ -1,23 +1,25 @@
 package lp.JavaFxClient.controllers;
 
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
+
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import lp.JavaFxClient.model.UserDTO;
 import lp.JavaFxClient.services.ApiService;
+import lp.JavaFxClient_Equipa07_rec.UserSession;
 
 public class ProfileController {
 	private final ApiService api = new ApiService();
-
+	ObjectMapper mapper = new ObjectMapper();
+	
 	@FXML
 	private Pane pane_pass;
 	
@@ -33,6 +35,12 @@ public class ProfileController {
 	@FXML
 	private Button bt_cancel;
 	
+	@FXML 
+	private Button bt_email;
+	
+	@FXML
+	private Button bt_budget;
+	
 	@FXML
 	private Label lbl_changePass;
 	
@@ -45,6 +53,8 @@ public class ProfileController {
 	@FXML
 	private TextField txt_budget;
 	
+	private UserDTO currentUser;
+	
 	private void show(String title, String text) {
 		 Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		 alert.setTitle(title);
@@ -54,8 +64,117 @@ public class ProfileController {
 	 }
 	
 	@FXML
-	public void changePassword() {
+	public void initialize() {
+	    try {
+	        Long userId = UserSession.getInstance().getCurrentUserId();
+	        String json = api.get("/users/" + userId);
 
+	        if (json.startsWith("ERROR")) {
+	            show("Error while loading profile", json);
+	            return;
+	        }
+
+	        currentUser = mapper.readValue(json, UserDTO.class);
+
+	        txt_name.setText(currentUser.getUsername());
+	        txt_email.setText(currentUser.getEmail());
+	        txt_budget.setText(String.valueOf(currentUser.getBudget()));
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        show("Error", e.getMessage());
+	    }
+
+	    bt_budget.setOnMouseClicked(e -> editBudget());
+	    bt_email.setOnMouseClicked(e -> editEmail());
+	}
+	
+	@FXML
+	public void editEmail() {
+	    if (currentUser == null) {
+	        show("Error", "User not loaded.");
+	        return;
+	    }
+
+	    String newEmail = txt_email.getText().trim();
+
+	    if (newEmail.isBlank()) {
+	        show("Attention!", "Email cannot be empty.");
+	        return;
+	    }
+
+	    if (newEmail.equals(currentUser.getEmail())) {
+	        show("Attention!", "Email must be different to save.");
+	        return;
+	    }
+
+	    try {
+	        String body = """
+	            { "newEmail": "%s" }
+	            """.formatted(newEmail);
+
+	        String response = api.post("/users/change-email", body);
+
+	        if (response.startsWith("ERROR")) {
+	            show("Error", response);
+	            return;
+	        }
+
+	        currentUser.setEmail(newEmail);
+	        show("Success", "Email updated successfully.");
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        show("Error", "Failed to update email.");
+	    }
+	}
+
+	
+	@FXML
+	public void editBudget() {
+	    if (currentUser == null) {
+	        show("Error", "User not loaded.");
+	        return;
+	    }
+
+	    double newBudget;
+	    try {
+	        newBudget = Double.parseDouble(txt_budget.getText());
+	    } catch (NumberFormatException e) {
+	        show("Error", "Invalid budget value.");
+	        return;
+	    }
+
+	    if (Double.compare(newBudget, currentUser.getBudget()) == 0) {
+	        show("Attention!", "Budget must be different to save.");
+	        return;
+	    }
+
+	    try {
+	        String body = """
+	            { "newBudget": %.2f }
+	            """.formatted(newBudget);
+
+	        String response = api.post("/users/change-budget", body);
+
+	        if (response.startsWith("ERROR")) {
+	            show("Error", response);
+	            return;
+	        }
+
+	        currentUser.setBudget(newBudget);
+	        show("Success", "Budget updated successfully.");
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        show("Error", "Failed to update budget.");
+	    }
+	}
+
+
+	@FXML
+	public void changePassword() {
+	    Long user = UserSession.getInstance().getCurrentUserId();
 	    String oldPass = txt_oldPass.getText();
 	    String newPass = txt_newPass.getText();
 
@@ -72,16 +191,17 @@ public class ProfileController {
 	    try {
 	        String json = """
 	            {
+	        		  "userId": "%d",	
 	              "oldPassword": "%s",
 	              "newPassword": "%s"
 	            }
-	            """.formatted(oldPass, newPass);
+	            """.formatted(user, oldPass, newPass);
 
 	        api.post("/users/change-password", json);
 
 	        txt_oldPass.clear();
 	        txt_newPass.clear();
-	        paneView();
+	        paneView(null);
 	        
 	    } catch (Exception e) {
 	        show("Warning!", "Error while trying to change password, please try again.");
@@ -90,7 +210,7 @@ public class ProfileController {
 	}
 
 	@FXML
-	public void paneView() {
+	public void paneView(MouseEvent event) {
 		if(pane_pass.isVisible() == true){
 			pane_pass.setVisible(false);
 		}else {
@@ -100,7 +220,7 @@ public class ProfileController {
 	
 	@FXML
     public void cancelChange() {
-		paneView();
+		paneView(null);
 		txt_oldPass.clear();
         txt_newPass.clear();
     }

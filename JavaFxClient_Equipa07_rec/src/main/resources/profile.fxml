@@ -18,16 +18,16 @@
          </image>
       </ImageView>
       <Text fill="WHITE" layoutX="83.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
-      <TextField id="txt_name" layoutX="83.0" layoutY="120.0" />
+      <TextField fx:id="txt_name" layoutX="83.0" layoutY="120.0" />
       <Text fill="WHITE" layoutX="83.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
-      <TextField id="txt_email" layoutX="83.0" layoutY="182.0" />
+      <TextField fx:id="txt_email" layoutX="83.0" layoutY="182.0" />
       <Text fill="WHITE" layoutX="83.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Budget" />
-      <TextField id="txt_budget" layoutX="83.0" layoutY="242.0" />
-      <Button id="bt_name" layoutX="235.0" layoutY="120.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="28.0" text="✎" />
-      <Button id="bt_email" layoutX="235.0" layoutY="181.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="28.0" text="✎" />
-      <Button id="bt_budget" layoutX="235.0" layoutY="241.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="28.0" text="✎" />
+      <TextField fx:id="txt_budget" layoutX="83.0" layoutY="242.0" />
+      <Button fx:id="bt_name" layoutX="235.0" layoutY="120.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="28.0" text="✎" />
+      <Button fx:id="bt_email" layoutX="235.0" layoutY="181.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="28.0" text="✎" />
+      <Button fx:id="bt_budget" layoutX="235.0" layoutY="241.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="28.0" text="✎" />
       <Text fill="WHITE" layoutX="98.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Forgot yourt password?" />
-      <Label id="lbl_changePass" layoutX="120.0" layoutY="311.0" onAction="#paneView" text="Change it here!" textFill="WHITE" underline="true">
+      <Label fx:id="lbl_changePass" layoutX="120.0" layoutY="311.0" onMouseClicked="#paneView" text="Change it here!" textFill="WHITE" underline="true">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font>
@@ -37,24 +37,28 @@
             <Image url="@images/Logo_BugdetBuddy.png" />
          </image>
       </ImageView>
-      <Pane id="pane_pass" layoutY="-1.0" prefHeight="370.0" prefWidth="326.0">
+      <Pane fx:id="pane_pass" layoutY="-1.0" prefHeight="370.0" prefWidth="326.0" visible="false" >
          <children>
             <ImageView fitHeight="385.0" fitWidth="672.0" layoutX="-253.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/background.jpg" />
                </image>
             </ImageView>
-            <Text fill="WHITE" layoutX="127.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Old Password" />
-            <Text fill="WHITE" layoutX="124.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Password" />
-            <TextField id="txt_oldPass" layoutX="87.0" layoutY="136.0" />
-            <TextField id="txt_newPass" layoutX="87.0" layoutY="209.0" />
-            <Button id="bt_changePass" layoutX="93.0" layoutY="265.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="137.0" text="Submit New Password" onAction="#changePassword" />
-            <ImageView fitHeight="112.0" fitWidth="146.0" layoutX="105.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+            <Text fill="WHITE" layoutX="121.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Password" />
+            <TextField fx:id="txt_newPass" layoutX="89.0" layoutY="225.0" />
+            <Button fx:id="bt_changePass" layoutX="91.0" layoutY="266.0" mnemonicParsing="false" onAction="#changePassword" prefHeight="43.0" prefWidth="137.0" text="Submit New Password" />
+            <ImageView fitHeight="154.0" fitWidth="156.0" layoutX="86.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/Logo_BugdetBuddy.png" />
                </image>
             </ImageView>
-            <Button id="bt_cancel" layoutY="349.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Cancel.." onAction="#paneView" />
+            <Label layoutX="141.0" layoutY="328.0" onMouseClicked="#cancelChange" text="Cancel" textFill="WHITE" underline="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />	
+               </font>
+            </Label>
+            <Text fill="WHITE" layoutX="121.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Old Password" />
+            <TextField fx:id="txt_oldPass" layoutX="89.0" layoutY="160.0" />
          </children>
       </Pane>
    </children>

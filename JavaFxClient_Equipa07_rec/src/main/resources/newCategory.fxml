@@ -9,20 +9,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-      prefHeight="400.0" prefWidth="600.0"
-      xmlns="http://javafx.com/javafx/25"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="lp.JavaFxClient.controllers.NewCategoryController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lp.JavaFxClient.controllers.NewCategoryController">
 
    <children>
       <ImageView fitHeight="544.0" fitWidth="919.0" layoutX="-210.0" layoutY="-121.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../OneDrive/Imágenes/project/black.jpg" />
+            <Image url="@images/background.jpg" />
          </image>
       </ImageView>
 
-      <TextField fx:id="txtName" layoutX="222.0" layoutY="167.0" />
+      <TextField fx:id="txt_name" layoutX="222.0" layoutY="167.0" />
       <Text fill="WHITE" layoutX="209.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New category">
          <font>
             <Font name="System Bold" size="28.0" />
@@ -30,20 +26,20 @@
       </Text>
 
       <Text fill="WHITE" layoutX="225.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
-      <TextField fx:id="txtBudget" layoutX="223.0" layoutY="223.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="txt_budget" layoutX="223.0" layoutY="223.0" prefHeight="25.0" prefWidth="149.0" />
       <Text fill="WHITE" layoutX="222.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Budget:" />
 
-      <Button fx:id="btn_save" layoutX="276.0" layoutY="321.0" mnemonicParsing="false" text="Save" />
+      <Button fx:id="btn_save" layoutX="276.0" layoutY="321.0" mnemonicParsing="false" onAction="#onSave" text="Save" />
 
-      <Label fx:id="lbl_cancel" layoutX="279.0" layoutY="353.0" text="Cancel" textFill="WHITE" underline="true" />
+      <Label fx:id="lbl_cancel" layoutX="279.0" layoutY="353.0" onMouseClicked="#onCancel" text="Cancel" textFill="WHITE" underline="true" />
 
-      <ImageView fitHeight="84.0" fitWidth="149.0" layoutX="231.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="132.0" fitWidth="149.0" layoutX="232.0" layoutY="-16.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../Downloads/1769011097555-removebg-preview.png" />
+            <Image url="@images/Logo_BugdetBuddy.png" />
          </image>
       </ImageView>
 
-      <TextField fx:id="txtDescription" layoutX="222.0" layoutY="278.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="txt_description" layoutX="222.0" layoutY="278.0" prefHeight="25.0" prefWidth="149.0" />
       <Text fill="WHITE" layoutX="222.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description (Optional):" />
    </children>
 </Pane>

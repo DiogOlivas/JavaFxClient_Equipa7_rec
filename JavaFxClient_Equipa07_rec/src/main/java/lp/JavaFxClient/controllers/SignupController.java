@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import lp.JavaFxClient.services.ApiService;
@@ -41,11 +42,11 @@ public class SignupController {
 	 
 	 @FXML
 	 public void initialize() {
-	        lbl_logIn.setOnMouseClicked(event -> openLogin());
+	        //lbl_logIn.setOnMouseClicked(event -> openLogin());
 	 }
 	 
 	 @FXML
-	 public void CreateUser() {
+	 public void createUser() {
 		   String username = txt_user.getText();
 	       String email = txt_email.getText();
 	       String password = txt_pass.getText();
@@ -63,13 +64,21 @@ public class SignupController {
 	       try {
 	    	   String json = """
 	  	   	 		{
-	  	   	 		"name": "%s",
+	  	   	 		"username": "%s",
 	  	   	 		"email": "%s",
 	  	   	 		"password": "%s"
 	  	   	 		}
 	  	   	 		""".formatted(username, email, password);
-	  	   	 	api.post("/users", json);
-	  	   	
+	    	   
+	    	   String response = api.post("/users/register", json);
+	           System.out.println("API response: " + response);
+	           System.out.println("JSON payload: " + json);
+	           
+	           if (response.startsWith("ERROR") || response.contains("fail")) {
+	               show("Signup Failed", response);
+	               return;
+	           }
+	           
 	  	   	 	try {
 	  	   	 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
 	  	   	 		Parent root = loader.load();
@@ -88,7 +97,8 @@ public class SignupController {
 	      }
 	 }
 	 
-	 private void openLogin() {
+	 @FXML
+	 private void openLogin(MouseEvent event) {
 			try {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
 		        Parent root = loader.load();
